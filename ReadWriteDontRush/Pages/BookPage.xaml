@@ -10,7 +10,7 @@
 
     <ScrollViewer>
 
-        <StackPanel Margin="20">
+        <StackPanel Margin="20" >
 
             <TextBlock x:Name="TbTitle"
                        FontSize="28"/>
