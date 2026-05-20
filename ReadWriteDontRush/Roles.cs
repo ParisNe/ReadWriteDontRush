@@ -20,8 +20,8 @@ namespace ReadWriteDontRush
             this.Users = new HashSet<Users>();
         }
     
-        public int RoleID { get; set; }
-        public string RoleName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }

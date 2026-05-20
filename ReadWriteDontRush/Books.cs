@@ -24,16 +24,17 @@ namespace ReadWriteDontRush
             this.Genres = new HashSet<Genres>();
         }
     
-        public int BookID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string CoverImage { get; set; }
-        public string BookText { get; set; }
-        public int AuthorID { get; set; }
+        public string CoverUrl { get; set; }
+        public int AuthorId { get; set; }
+        public string TextContent { get; set; }
         public Nullable<decimal> AverageRating { get; set; }
-        public bool IsFrozen { get; set; }
+        public Nullable<bool> IsFrozen { get; set; }
         public string FreezeReason { get; set; }
-        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookListItems> BookListItems { get; set; }

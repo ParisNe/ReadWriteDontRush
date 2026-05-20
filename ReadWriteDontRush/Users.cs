@@ -26,15 +26,15 @@ namespace ReadWriteDontRush
             this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
         }
     
-        public int UserID { get; set; }
-        public string Login { get; set; }
-        public string PasswordHash { get; set; }
-        public string UserName { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
-        public int RoleID { get; set; }
-        public bool IsFrozen { get; set; }
+        public string PasswordHash { get; set; }
+        public string DisplayName { get; set; }
+        public int RoleId { get; set; }
+        public Nullable<bool> IsFrozen { get; set; }
         public string FreezeReason { get; set; }
-        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuthorRequests> AuthorRequests { get; set; }

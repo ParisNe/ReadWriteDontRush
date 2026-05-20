@@ -23,21 +23,6 @@ namespace ReadWriteDontRush.Pages
         public CatalogPage()
         {
             InitializeComponent();
-
-            LoadBooks();
-        }
-        private void LoadBooks()
-        {
-            BooksGrid.ItemsSource =
-                Core.Context.Books.ToList();
-        }
-
-        private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            BooksGrid.ItemsSource =
-                Core.Context.Books
-                .Where(x => x.Title.Contains(TbSearch.Text))
-                .ToList();
         }
     }
 }

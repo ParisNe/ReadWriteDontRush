@@ -14,11 +14,10 @@ namespace ReadWriteDontRush
     
     public partial class AuthorRequests
     {
-        public int RequestID { get; set; }
-        public int UserID { get; set; }
-        public string RequestText { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public string Status { get; set; }
-        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     
         public virtual Users Users { get; set; }
     }

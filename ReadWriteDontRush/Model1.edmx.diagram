@@ -4,36 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e4f6f1ede61748bea80f29b5717b86e8" Name="Diagram1">
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.AuthorRequests" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.BookListItems" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.BookLists" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.Books" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.Complaints" Width="1.5" PointX="10.5" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.ComplaintTypes" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.Genres" Width="1.5" PointX="7.5" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.Reviews" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.Roles" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.UnfreezeRequests" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ReadWriteDontRushModel.Users" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_AuthorRequests_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_BookListItems_Books" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_BookListItems_Lists" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_BookLists_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Books_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Complaints_Books" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Reviews_Books" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_UnfreezeRequests_Books" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Complaints_Reviews" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Complaints_Sender" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Complaints_TargetUser" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Complaints_Types" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Reviews_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_UnfreezeRequests_Reviews" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_Users_Roles" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.FK_UnfreezeRequests_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="ReadWriteDontRushModel.BookGenres" ManuallyRouted="false" />
+      <Diagram DiagramId="df6669f633b040978ba2ecf333bf7057" Name="Diagram1">
+        <EntityTypeShape EntityType="ReadWriteAppModel.AuthorRequests" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.BookListItems" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.BookLists" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.Books" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.Complaints" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.ComplaintTypes" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.Genres" Width="1.5" PointX="7.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.Reviews" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.Roles" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.UnfreezeRequests" Width="1.5" PointX="12.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadWriteAppModel.Users" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__AuthorReq__UserI__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__BookListI__BookI__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__BookListI__ListI__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__BookLists__UserI__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Books__AuthorId__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Complaint__Targe__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Reviews__BookId__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__UnfreezeR__Targe__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Complaint__Compl__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Complaint__Sende__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Complaint__Targe__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Complaint__Targe__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Reviews__UserId__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__UnfreezeR__Targe__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__Users__RoleId__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.FK__UnfreezeR__UserI__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadWriteAppModel.BookGenres" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

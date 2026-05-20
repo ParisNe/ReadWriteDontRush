@@ -24,11 +24,45 @@ namespace ReadWriteDontRush
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new CatalogPage());
+            MainFrame.Navigate(new LoginPage());
+
+            AuthorBtn.Visibility = Visibility.Collapsed;
+            AdminBtn.Visibility = Visibility.Collapsed;
         }
-        private void BtnCatalog_Click(object sender, RoutedEventArgs e)
+
+        public void OpenCatalog()
         {
             MainFrame.Navigate(new CatalogPage());
+
+            if (App.CurrentUser.Roles.Name == "AUTHOR")
+            {
+                AuthorBtn.Visibility = Visibility.Visible;
+            }
+
+            if (App.CurrentUser.Roles.Name == "ADMIN")
+            {
+                AdminBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CatalogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new CatalogPage());
+        }
+
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new ProfilePage());
+        }
+
+        private void AuthorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AuthorPage());
+        }
+
+        private void AdminBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AdminPage());
         }
     }
 }

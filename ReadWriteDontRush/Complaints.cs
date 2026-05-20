@@ -14,20 +14,20 @@ namespace ReadWriteDontRush
     
     public partial class Complaints
     {
-        public int ComplaintID { get; set; }
-        public int ComplaintTypeID { get; set; }
-        public int SenderUserID { get; set; }
-        public Nullable<int> BookID { get; set; }
-        public Nullable<int> ReviewID { get; set; }
-        public Nullable<int> TargetUserID { get; set; }
-        public string ComplaintText { get; set; }
+        public int Id { get; set; }
+        public int ComplaintTypeId { get; set; }
+        public int SenderId { get; set; }
+        public Nullable<int> TargetBookId { get; set; }
+        public Nullable<int> TargetUserId { get; set; }
+        public Nullable<int> TargetReviewId { get; set; }
+        public string Reason { get; set; }
         public string Status { get; set; }
-        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     
         public virtual Books Books { get; set; }
-        public virtual Reviews Reviews { get; set; }
+        public virtual ComplaintTypes ComplaintTypes { get; set; }
         public virtual Users Users { get; set; }
         public virtual Users Users1 { get; set; }
-        public virtual ComplaintTypes ComplaintTypes { get; set; }
+        public virtual Reviews Reviews { get; set; }
     }
 }

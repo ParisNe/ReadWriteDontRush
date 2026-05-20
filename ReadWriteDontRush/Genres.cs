@@ -20,8 +20,8 @@ namespace ReadWriteDontRush
             this.Books = new HashSet<Books>();
         }
     
-        public int GenreID { get; set; }
-        public string GenreName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Books> Books { get; set; }

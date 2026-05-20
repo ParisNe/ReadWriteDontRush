@@ -14,10 +14,10 @@ namespace ReadWriteDontRush
     
     public partial class BookListItems
     {
-        public int ListItemID { get; set; }
-        public int ListID { get; set; }
-        public int BookID { get; set; }
-        public System.DateTime AddedAt { get; set; }
+        public int Id { get; set; }
+        public int ListId { get; set; }
+        public int BookId { get; set; }
+        public Nullable<System.DateTime> AddedAt { get; set; }
     
         public virtual Books Books { get; set; }
         public virtual BookLists BookLists { get; set; }

@@ -20,8 +20,8 @@ namespace ReadWriteDontRush
             this.Complaints = new HashSet<Complaints>();
         }
     
-        public int ComplaintTypeID { get; set; }
-        public string TypeName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaints> Complaints { get; set; }
