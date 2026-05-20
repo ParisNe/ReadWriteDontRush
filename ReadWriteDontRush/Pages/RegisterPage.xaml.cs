@@ -24,15 +24,16 @@ namespace ReadWriteDontRush.Pages
         {
             InitializeComponent();
         }
-        private void BtnCreate_Click(object sender, RoutedEventArgs e)
+
+        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             Users user = new Users()
             {
-                UserName = TbName.Text,
-                Login = TbLogin.Text,
-                Email = TbEmail.Text,
-                PasswordHash = PbPassword.Password,
-                RoleID = 1,
+                Username = LoginTb.Text,
+                Email = EmailTb.Text,
+                PasswordHash = PasswordTb.Password,
+                DisplayName = NameTb.Text,
+                RoleId = 1,
                 IsFrozen = false
             };
 
@@ -40,13 +41,8 @@ namespace ReadWriteDontRush.Pages
 
             Core.Context.SaveChanges();
 
-            MessageBox.Show("Аккаунт создан");
+            MessageBox.Show("Регистрация успешна");
 
-            NavigationService.Navigate(new LoginPage());
-        }
-
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
-        {
             NavigationService.Navigate(new LoginPage());
         }
     }

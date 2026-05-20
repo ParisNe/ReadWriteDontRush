@@ -13,5 +13,7 @@ namespace ReadWriteDontRush
     /// </summary>
     public partial class App : Application
     {
+        public static Users CurrentUser;
+
     }
 }

@@ -23,6 +23,55 @@ namespace ReadWriteDontRush.Pages
         public AuthorPage()
         {
             InitializeComponent();
+
+            LoadBooks();
+        }
+
+        private void LoadBooks()
+        {
+            BooksGrid.ItemsSource =
+                Core.Context.Books
+                .Where(x => x.AuthorId ==
+                    App.CurrentUser.Id)
+                .ToList();
+        }
+
+        private void AddBookBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Books book = new Books()
+            {
+                Title = "Новая книга",
+                Description = "Описание книги",
+                TextContent = "Текст книги",
+                AuthorId = App.CurrentUser.Id,
+                AverageRating = 0,
+                IsFrozen = false
+            };
+
+            Core.Context.Books.Add(book);
+
+            Core.Context.SaveChanges();
+
+            MessageBox.Show("Книга добавлена");
+
+            LoadBooks();
+        }
+
+        private void DeleteBookBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Books selectedBook =
+                BooksGrid.SelectedItem as Books;
+
+            if (selectedBook != null)
+            {
+                Core.Context.Books.Remove(selectedBook);
+
+                Core.Context.SaveChanges();
+
+                MessageBox.Show("Книга удалена");
+
+                LoadBooks();
+            }
         }
     }
 }

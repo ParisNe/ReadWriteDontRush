@@ -24,25 +24,31 @@ namespace ReadWriteDontRush.Pages
         {
             InitializeComponent();
         }
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             var user = Core.Context.Users.FirstOrDefault(x =>
-                x.Login == TbLogin.Text &&
-                x.PasswordHash == PbPassword.Password);
+                x.Username == LoginTb.Text &&
+                x.PasswordHash == PasswordTb.Password);
 
-            if (user == null)
+            if (user != null)
+            {
+                App.CurrentUser = user;
+
+                MessageBox.Show("Успешный вход");
+
+                MainWindow main =
+                    (MainWindow)Application.Current.MainWindow;
+
+                main.OpenCatalog();
+            }
+            else
             {
                 MessageBox.Show("Неверный логин или пароль");
-                return;
             }
-
-            MainWindow window = new MainWindow();
-            window.Show();
-
-            Window.GetWindow(this).Close();
         }
 
-        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
         }

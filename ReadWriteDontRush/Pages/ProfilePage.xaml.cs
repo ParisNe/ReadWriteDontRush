@@ -23,6 +23,31 @@ namespace ReadWriteDontRush.Pages
         public ProfilePage()
         {
             InitializeComponent();
+
+            LoadUser();
+        }
+
+        private void LoadUser()
+        {
+            LoginTb.Text =
+                App.CurrentUser.Username;
+
+            EmailTb.Text =
+                App.CurrentUser.Email;
+
+            NameTb.Text =
+                App.CurrentUser.DisplayName;
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            App.CurrentUser.Username = LoginTb.Text;
+            App.CurrentUser.Email = EmailTb.Text;
+            App.CurrentUser.DisplayName = NameTb.Text;
+
+            Core.Context.SaveChanges();
+
+            MessageBox.Show("Профиль обновлен");
         }
     }
 }
