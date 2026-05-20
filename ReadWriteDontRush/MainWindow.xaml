@@ -7,6 +7,30 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="150"/>
+        <ColumnDefinition/>
+    </Grid.ColumnDefinitions>
+
+    <StackPanel Background="LightGray">
+
+        <Button Content="Каталог"
+                    Height="50"
+                    Margin="5"
+                    Click="BtnCatalog_Click"/>
+
+        <Button Content="Профиль"
+                    Height="50"
+                    Margin="5"/>
+
+        <Button Content="Списки"
+                    Height="50"
+                    Margin="5"/>
+
+    </StackPanel>
+
+    <Frame x:Name="MainFrame"
+               Grid.Column="1"/>
+
     </Grid>
 </Window>

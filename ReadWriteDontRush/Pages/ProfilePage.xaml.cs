@@ -1,5 +1,4 @@
-﻿using ReadWriteDontRush.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ReadWriteDontRush
+namespace ReadWriteDontRush.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ProfilePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProfilePage : Page
     {
-        public MainWindow()
+        public ProfilePage()
         {
             InitializeComponent();
-            MainFrame.Navigate(new CatalogPage());
-        }
-        private void BtnCatalog_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new CatalogPage());
         }
     }
 }
