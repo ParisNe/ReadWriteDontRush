@@ -25,20 +25,28 @@ namespace ReadWriteDontRush.Pages
             InitializeComponent();
         }
 
-        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        private void Register_Click(object sender, RoutedEventArgs e)
         {
+            if (Core.Context.Users.Any(x => x.Username == UsernameBox.Text))
+            {
+                MessageBox.Show("Логин занят");
+                return;
+            }
+
+            var role = Core.Context.Roles.First(x => x.Name == "USER");
+
             Users user = new Users()
             {
-                Username = LoginTb.Text,
-                Email = EmailTb.Text,
-                PasswordHash = PasswordTb.Password,
-                DisplayName = NameTb.Text,
-                RoleId = 1,
+                Username = UsernameBox.Text,
+                Email = EmailBox.Text,
+                PasswordHash = PasswordBox.Password,
+                DisplayName = DisplayNameBox.Text,
+                RoleId = role.Id,
+                CreatedAt = DateTime.Now,
                 IsFrozen = false
             };
 
             Core.Context.Users.Add(user);
-
             Core.Context.SaveChanges();
 
             MessageBox.Show("Регистрация успешна");

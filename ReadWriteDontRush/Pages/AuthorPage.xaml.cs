@@ -29,22 +29,30 @@ namespace ReadWriteDontRush.Pages
 
         private void LoadBooks()
         {
-            BooksGrid.ItemsSource =
+            BooksList.ItemsSource =
                 Core.Context.Books
-                .Where(x => x.AuthorId ==
-                    App.CurrentUser.Id)
+                .Where(x =>
+                    x.AuthorId ==
+                    MainWindow.CurrentUser.Id)
                 .ToList();
         }
 
-        private void AddBookBtn_Click(object sender, RoutedEventArgs e)
+        private void AddBook_Click(object sender, RoutedEventArgs e)
         {
             Books book = new Books()
             {
-                Title = "Новая книга",
-                Description = "Описание книги",
-                TextContent = "Текст книги",
-                AuthorId = App.CurrentUser.Id,
+                Title = TitleBox.Text,
+                Description = DescriptionBox.Text,
+                CoverUrl = CoverBox.Text,
+                TextContent = ContentBox.Text,
+
+                AuthorId = MainWindow.CurrentUser.Id,
+
                 AverageRating = 0,
+
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+
                 IsFrozen = false
             };
 
@@ -55,23 +63,6 @@ namespace ReadWriteDontRush.Pages
             MessageBox.Show("Книга добавлена");
 
             LoadBooks();
-        }
-
-        private void DeleteBookBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Books selectedBook =
-                BooksGrid.SelectedItem as Books;
-
-            if (selectedBook != null)
-            {
-                Core.Context.Books.Remove(selectedBook);
-
-                Core.Context.SaveChanges();
-
-                MessageBox.Show("Книга удалена");
-
-                LoadBooks();
-            }
         }
     }
 }

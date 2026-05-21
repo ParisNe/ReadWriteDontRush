@@ -829,7 +829,7 @@
           <End Role="Books" Type="Self.Books" Multiplicity="*" />
           <End Role="Genres" Type="Self.Genres" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ReadWriteAppEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ReadWriteAppEntities67" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AuthorRequests" EntityType="Self.AuthorRequests" />
           <EntitySet Name="BookListItems" EntityType="Self.BookListItems" />
           <EntitySet Name="BookLists" EntityType="Self.BookLists" />
@@ -916,7 +916,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ReadWriteAppModelContainer" CdmEntityContainer="ReadWriteAppEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ReadWriteAppModelContainer" CdmEntityContainer="ReadWriteAppEntities67">
           <EntitySetMapping Name="AuthorRequests">
             <EntityTypeMapping TypeName="ReadWriteAppModel.AuthorRequests">
               <MappingFragment StoreEntitySet="AuthorRequests">

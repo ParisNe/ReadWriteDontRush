@@ -38,15 +38,17 @@ namespace ReadWriteDontRush.Pages
                 return;
             }
 
-            Session.CurrentUser = user;
+            MainWindow.CurrentUser = user;
 
-            var window = (MainWindow)Application.Current.MainWindow;
-            window.UpdateSidebar();
+            MainWindow main =
+                (MainWindow)Application.Current.MainWindow;
 
-            window.MainFrame.Navigate(new CatalogPage());
+            main.UpdateSidebar();
+
+            main.MainFrame.Navigate(new CatalogPage());
         }
 
-        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        private void Register_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
         }

@@ -24,30 +24,36 @@ namespace ReadWriteDontRush.Pages
         {
             InitializeComponent();
 
-            LoadUser();
+            LoadProfile();
         }
 
-        private void LoadUser()
+        private void LoadProfile()
         {
-            LoginTb.Text =
-                App.CurrentUser.Username;
+            var user = MainWindow.CurrentUser;
 
-            EmailTb.Text =
-                App.CurrentUser.Email;
+            UsernameText.Text =
+                "Логин: " + user.Username;
 
-            NameTb.Text =
-                App.CurrentUser.DisplayName;
-        }
+            EmailText.Text =
+                "Email: " + user.Email;
 
-        private void SaveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            App.CurrentUser.Username = LoginTb.Text;
-            App.CurrentUser.Email = EmailTb.Text;
-            App.CurrentUser.DisplayName = NameTb.Text;
+            var role = Core.Context.Roles
+                .First(x => x.Id == user.RoleId);
 
-            Core.Context.SaveChanges();
+            RoleText.Text =
+                "Роль: " + role.Name;
 
-            MessageBox.Show("Профиль обновлен");
+            ReviewsList.ItemsSource =
+                Core.Context.Reviews
+                .Where(x => x.UserId == user.Id)
+                .ToList();
+
+            if (user.IsFrozen == true)
+            {
+                FreezeReasonText.Text =
+                    "Причина заморозки: " +
+                    user.FreezeReason;
+            }
         }
     }
 }

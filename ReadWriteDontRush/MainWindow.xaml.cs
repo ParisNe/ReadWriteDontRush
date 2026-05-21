@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ReadWriteDontRush
 {
@@ -21,48 +22,45 @@ namespace ReadWriteDontRush
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Users CurrentUser;
+
         public MainWindow()
         {
             InitializeComponent();
+
             MainFrame.Navigate(new LoginPage());
 
-            AuthorBtn.Visibility = Visibility.Collapsed;
             AdminBtn.Visibility = Visibility.Collapsed;
+            AuthorBtn.Visibility = Visibility.Collapsed;
+            FreezeBtn.Visibility = Visibility.Collapsed;
         }
 
-        public void OpenCatalog()
+        public void UpdateSidebar()
         {
-            MainFrame.Navigate(new CatalogPage());
+            if (CurrentUser == null)
+                return;
 
-            if (App.CurrentUser.Roles.Name == "AUTHOR")
+            var role = Core.Context.Roles
+                .First(x => x.Id == CurrentUser.RoleId);
+
+            AdminBtn.Visibility = Visibility.Collapsed;
+            AuthorBtn.Visibility = Visibility.Collapsed;
+            FreezeBtn.Visibility = Visibility.Collapsed;
+
+            if (role.Name == "ADMIN")
+            {
+                AdminBtn.Visibility = Visibility.Visible;
+            }
+
+            if (role.Name == "AUTHOR")
             {
                 AuthorBtn.Visibility = Visibility.Visible;
             }
 
-            if (App.CurrentUser.Roles.Name == "ADMIN")
+            if (CurrentUser.IsFrozen == true)
             {
-                AdminBtn.Visibility = Visibility.Visible;
+                FreezeBtn.Visibility = Visibility.Visible;
             }
-        }
-
-        private void CatalogBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new CatalogPage());
-        }
-
-        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new ProfilePage());
-        }
-
-        private void AuthorBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new AuthorPage());
-        }
-
-        private void AdminBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new AdminPage());
         }
     }
 }

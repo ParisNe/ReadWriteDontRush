@@ -13,10 +13,10 @@ namespace ReadWriteDontRush
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ReadWriteAppEntities : DbContext
+    public partial class ReadWriteAppEntities67 : DbContext
     {
-        public ReadWriteAppEntities()
-            : base("name=ReadWriteAppEntities")
+        public ReadWriteAppEntities67()
+            : base("name=ReadWriteAppEntities67")
         {
         }
     
