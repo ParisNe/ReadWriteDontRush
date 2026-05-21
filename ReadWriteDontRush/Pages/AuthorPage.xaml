@@ -14,25 +14,60 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Верхняя панель -->
-        <Border Grid.Row="0" Background="White" Padding="15" Margin="0,0,0,10">
+        <!-- Верх -->
+        <Border Grid.Row="0"
+                Background="White"
+                Padding="20"
+                BorderBrush="#E5E5E5"
+                BorderThickness="0,0,0,1">
+
             <StackPanel>
-                <TextBlock Text="✍️ Панель автора" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
-                <WrapPanel Margin="0,10,0,0">
-                    <Button x:Name="BtnAddBook" Content="➕ Добавить новую книгу" 
-                            Background="#27AE60" Foreground="White" Height="40" Width="200"
-                            Margin="0,0,10,0" Click="BtnAddBook_Click"/>
-                    <Button x:Name="BtnMyBooks" Content="📚 Мои книги" 
-                            Background="#3498DB" Foreground="White" Height="40" Width="150"
-                            Margin="0,0,10,0" Click="BtnMyBooks_Click"/>
-                    <Button x:Name="BtnFrozenBooks" Content="❄️ Замороженные книги" 
-                            Background="#E67E22" Foreground="White" Height="40" Width="200"
+
+                <TextBlock Text="Панель автора"
+                           FontSize="26"
+                           FontWeight="SemiBold"
+                           Foreground="#222"/>
+
+                <WrapPanel Margin="0,18,0,0">
+
+                    <Button x:Name="BtnAddBook"
+                            Content="Добавить книгу"
+                            Width="170"
+                            Height="38"
+                            Margin="0,0,10,0"
+                            Background="#3B82F6"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="BtnAddBook_Click"/>
+
+                    <Button x:Name="BtnMyBooks"
+                            Content="Мои книги"
+                            Width="130"
+                            Height="38"
+                            Margin="0,0,10,0"
+                            Background="#EAEAEA"
+                            Foreground="#222"
+                            BorderThickness="0"
+                            Click="BtnMyBooks_Click"/>
+
+                    <Button x:Name="BtnFrozenBooks"
+                            Content="Замороженные"
+                            Width="160"
+                            Height="38"
+                            Background="#EAEAEA"
+                            Foreground="#222"
+                            BorderThickness="0"
                             Click="BtnFrozenBooks_Click"/>
+
                 </WrapPanel>
+
             </StackPanel>
         </Border>
 
         <!-- Контент -->
-        <Frame x:Name="AuthorContentFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="AuthorContentFrame"
+               Grid.Row="1"
+               Margin="20"
+               NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>
