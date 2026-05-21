@@ -177,12 +177,20 @@ namespace ReadWriteDontRush.Pages
             {
                 Title = "Выберите список",
                 Width = 300,
-                Height = 250,
+                Height = 350,  // Увеличил высоту
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize
             };
 
+            // Добавляем ScrollViewer для прокрутки
+            var scrollViewer = new ScrollViewer
+            {
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
+            };
+
             var stackPanel = new StackPanel { Margin = new Thickness(10) };
+
             var textBlock = new TextBlock
             {
                 Text = "Выберите раздел для книги:",
@@ -197,9 +205,10 @@ namespace ReadWriteDontRush.Pages
                 var btn = new Button
                 {
                     Content = listType.ListName,
-                    Height = 40,
+                    Height = 45,  // Увеличил высоту кнопок
                     Margin = new Thickness(0, 5, 0, 5),
                     Background = Brushes.LightGray,
+                    FontSize = 14,
                     Tag = listType.ListTypeID
                 };
                 btn.Click += (s, args) =>
@@ -210,7 +219,8 @@ namespace ReadWriteDontRush.Pages
                 stackPanel.Children.Add(btn);
             }
 
-            window.Content = stackPanel;
+            scrollViewer.Content = stackPanel;
+            window.Content = scrollViewer;
             window.Owner = Application.Current.MainWindow;
             window.ShowDialog();
         }

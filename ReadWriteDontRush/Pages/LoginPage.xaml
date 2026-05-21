@@ -9,53 +9,134 @@
       Title="LoginPage" Background="White">
 
     <Grid>
-        <Border Width="400" Height="500" Background="White" CornerRadius="10"
-                HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <Border Width="420"
+                Padding="35"
+                Background="White"
+                CornerRadius="16"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.2"/>
+                <DropShadowEffect BlurRadius="18"
+                                  ShadowDepth="2"
+                                  Opacity="0.12"/>
             </Border.Effect>
 
-            <StackPanel Margin="30">
-                <TextBlock Text="📚 BookPlatform" FontSize="28" FontWeight="Bold"
-                           HorizontalAlignment="Center" Margin="0,0,0,30"
-                           Foreground="#2C3E50"/>
+            <StackPanel>
+                <!-- Вкладки -->
+                <TabControl Background="Transparent"
+                            BorderThickness="0">
 
-                <TabControl>
+                    <!-- Вход -->
                     <TabItem Header="Вход">
-                        <StackPanel Margin="0,20,0,0">
-                            <TextBlock Text="Логин" Foreground="Gray" Margin="0,0,0,5"/>
-                            <TextBox x:Name="TxtLogin" Height="40" Margin="0,0,0,15"/>
 
-                            <TextBlock Text="Пароль" Foreground="Gray" Margin="0,0,0,5"/>
-                            <PasswordBox x:Name="TxtPassword" Height="40" Margin="0,0,0,20"/>
+                        <StackPanel Margin="10,20,10,0">
 
-                            <Button Content="Войти" Height="45" Background="#3498DB"
+                            <TextBlock Text="Логин"
+                                       Margin="0,0,0,6"
+                                       FontSize="14"
+                                       Foreground="Black"/>
+
+                            <TextBox x:Name="TxtLogin"
+                                     Height="42"
+                                     Padding="10"
+                                     FontSize="14"
+                                     BorderBrush="#D0D7DE"
+                                     BorderThickness="1"
+                                     Margin="0,0,0,16"/>
+
+                            <TextBlock Text="Пароль"
+                                       Margin="0,0,0,6"
+                                       FontSize="14"
+                                       Foreground="Black"/>
+
+                            <PasswordBox x:Name="TxtPassword"
+                                         Height="42"
+                                         Padding="10"
+                                         FontSize="14"
+                                         BorderBrush="#D0D7DE"
+                                         BorderThickness="1"
+                                         Margin="0,0,0,24"/>
+
+                            <Button Content="Войти"
+                                    Height="45"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Background="Purple"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
                                     Click="BtnLogin_Click"/>
+
                         </StackPanel>
                     </TabItem>
 
+                    <!-- Регистрация -->
                     <TabItem Header="Регистрация">
-                        <StackPanel Margin="0,20,0,0">
-                            <TextBlock Text="Логин" Foreground="Gray" Margin="0,0,0,5"/>
-                            <TextBox x:Name="TxtRegLogin" Height="40" Margin="0,0,0,10"/>
 
-                            <TextBlock Text="Пароль" Foreground="Gray" Margin="0,0,0,5"/>
-                            <PasswordBox x:Name="TxtRegPassword" Height="40" Margin="0,0,0,10"/>
+                        <StackPanel Margin="10,20,10,0">
 
-                            <TextBlock Text="Подтверждение пароля" Foreground="Gray" Margin="0,0,0,5"/>
-                            <PasswordBox x:Name="TxtConfirmPassword" Height="40" Margin="0,0,0,10"/>
+                            <TextBlock Text="Логин"
+                                       Margin="0,0,0,6"
+                                       Foreground="#555"/>
 
-                            <TextBlock Text="Имя пользователя" Foreground="Gray" Margin="0,0,0,5"/>
-                            <TextBox x:Name="TxtDisplayName" Height="40" Margin="0,0,0,10"/>
+                            <TextBox x:Name="TxtRegLogin"
+                                     Height="42"
+                                     Padding="10"
+                                     Margin="0,0,0,14"/>
 
-                            <TextBlock Text="Email" Foreground="Gray" Margin="0,0,0,5"/>
-                            <TextBox x:Name="TxtEmail" Height="40" Margin="0,0,0,20"/>
+                            <TextBlock Text="Пароль"
+                                       Margin="0,0,0,6"
+                                       Foreground="#555"/>
 
-                            <Button Content="Зарегистрироваться" Height="45" Background="#2ECC71"
+                            <PasswordBox x:Name="TxtRegPassword"
+                                         Height="42"
+                                         Padding="10"
+                                         Margin="0,0,0,14"/>
+
+                            <TextBlock Text="Подтверждение пароля"
+                                       Margin="0,0,0,6"
+                                       Foreground="#555"/>
+
+                            <PasswordBox x:Name="TxtConfirmPassword"
+                                         Height="42"
+                                         Padding="10"
+                                         Margin="0,0,0,14"/>
+
+                            <TextBlock Text="Имя пользователя"
+                                       Margin="0,0,0,6"
+                                       Foreground="#555"/>
+
+                            <TextBox x:Name="TxtDisplayName"
+                                     Height="42"
+                                     Padding="10"
+                                     Margin="0,0,0,14"/>
+
+                            <TextBlock Text="Email"
+                                       Margin="0,0,0,6"
+                                       Foreground="#555"/>
+
+                            <TextBox x:Name="TxtEmail"
+                                     Height="42"
+                                     Padding="10"
+                                     Margin="0,0,0,24"/>
+
+                            <Button Content="Создать аккаунт"
+                                    Height="45"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Background="#10B981"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
                                     Click="BtnRegister_Click"/>
+
                         </StackPanel>
                     </TabItem>
+
                 </TabControl>
+
             </StackPanel>
         </Border>
     </Grid>

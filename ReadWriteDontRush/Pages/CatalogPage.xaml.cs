@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ReadWriteDontRush.Pages
 {
@@ -38,6 +39,8 @@ namespace ReadWriteDontRush.Pages
         {
             try
             {
+                if (CmbGenre == null) return;
+
                 var genres = Core.Context.Genres.ToList();
 
                 CmbGenre.Items.Add(new ComboBoxItem { Content = "Все жанры", Tag = null });
@@ -61,6 +64,10 @@ namespace ReadWriteDontRush.Pages
         {
             try
             {
+                // Добавьте проверку, что CmbGenre и CmbSort инициализированы
+                if (CmbGenre == null || CmbSort == null || BooksItemsControl == null)
+                    return;
+
                 var query = Core.Context.Books.Where(b => b.IsFrozen == false).ToList();
 
                 string searchText = TxtSearch?.Text.Trim().ToLower() ?? "";
@@ -72,6 +79,7 @@ namespace ReadWriteDontRush.Pages
                     ).ToList();
                 }
 
+                // Добавьте проверку на null для CmbGenre.SelectedItem
                 if (CmbGenre.SelectedItem != null && CmbGenre.SelectedItem is ComboBoxItem selectedGenre && selectedGenre.Tag != null)
                 {
                     int genreId = (int)selectedGenre.Tag;
@@ -87,13 +95,14 @@ namespace ReadWriteDontRush.Pages
                     Content = b.Content ?? "",
                     AuthorName = b.Users?.DisplayName ?? "Неизвестный автор",
                     AuthorID = b.AuthorID,
-                    IsFrozen = b.IsFrozen ?? false,  
-                    CreatedAt = b.CreatedAt ?? DateTime.Now, 
+                    IsFrozen = b.IsFrozen ?? false,
+                    CreatedAt = b.CreatedAt ?? DateTime.Now,
                     AverageRating = b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) : 0,
                     ReviewsCount = b.Reviews.Count,
-                    GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genres.GenreName)) 
+                    GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genres.GenreName))
                 }).ToList();
 
+                // Сортировка
                 if (CmbSort.SelectedItem != null)
                 {
                     switch (CmbSort.SelectedIndex)
@@ -153,18 +162,102 @@ namespace ReadWriteDontRush.Pages
             {
                 selectedBookForList = Core.Context.Books.Find(bookVM.BookID);
 
-                var contextMenu = new ContextMenu();
-                var listTypes = Core.Context.BookListTypes.ToList();
+                // Создаем окно с выбором списка
+                var window = new Window
+                {
+                    Title = "Выберите список",
+                    Width = 300,
+                    Height = 350,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    ResizeMode = ResizeMode.NoResize
+                };
 
+                var scrollViewer = new ScrollViewer
+                {
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
+                };
+
+                var stackPanel = new StackPanel { Margin = new Thickness(10) };
+
+                var textBlock = new TextBlock
+                {
+                    Text = $"Выберите раздел для книги:\n{bookVM.Title}",
+                    FontWeight = FontWeights.Bold,
+                    Margin = new Thickness(0, 0, 0, 10),
+                    TextWrapping = TextWrapping.Wrap
+                };
+                stackPanel.Children.Add(textBlock);
+
+                var listTypes = Core.Context.BookListTypes.ToList();
                 foreach (var listType in listTypes)
                 {
-                    var menuItem = new MenuItem { Header = listType.ListName, Tag = listType.ListTypeID };
-                    menuItem.Click += AddToList_Click;
-                    contextMenu.Items.Add(menuItem);
+                    var btn = new Button
+                    {
+                        Content = listType.ListName,
+                        Height = 45,
+                        Margin = new Thickness(0, 5, 0, 5),
+                        Background = Brushes.LightGray,
+                        FontSize = 14,
+                        Tag = listType.ListTypeID
+                    };
+                    btn.Click += (s, args) =>
+                    {
+                        AddToList_Click((int)btn.Tag, listType.ListName);
+                        window.Close();
+                    };
+                    stackPanel.Children.Add(btn);
                 }
 
-                contextMenu.PlacementTarget = button;
-                contextMenu.IsOpen = true;
+                scrollViewer.Content = stackPanel;
+                window.Content = scrollViewer;
+                window.Owner = Application.Current.MainWindow;
+                window.ShowDialog();
+            }
+        }
+
+        private void AddToList_Click(int listTypeId, string listName)
+        {
+            if (selectedBookForList != null && Core.CurrentUser != null)
+            {
+                try
+                {
+                    var existing = Core.Context.UserBookLists
+                        .FirstOrDefault(ubl => ubl.UserID == Core.CurrentUser.UserID &&
+                                              ubl.BookID == selectedBookForList.BookID);
+
+                    if (existing != null)
+                    {
+                        existing.ListTypeID = listTypeId;
+                        MessageBox.Show($"Книга перемещена в список '{listName}'", "Успех",
+                                       MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        UserBookLists newList = new UserBookLists
+                        {
+                            UserID = Core.CurrentUser.UserID,
+                            BookID = selectedBookForList.BookID,
+                            ListTypeID = listTypeId,
+                            AddedAt = DateTime.Now
+                        };
+                        Core.Context.UserBookLists.Add(newList);
+                        MessageBox.Show($"Книга добавлена в список '{listName}'", "Успех",
+                                       MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+
+                    Core.Context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                                   MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if (Core.CurrentUser == null)
+            {
+                MessageBox.Show("Необходимо авторизоваться", "Ошибка",
+                               MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
