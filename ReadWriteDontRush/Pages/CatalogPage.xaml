@@ -8,74 +8,44 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogPage" Background="White">
 
-    <StackPanel Orientation="Horizontal">
+    <Grid Margin="10">
 
-        <TextBox x:Name="SearchBox"
-                 Width="200"
-                 Margin="5"
-                 TextChanged="FilterChanged"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <ComboBox x:Name="SortBox"
-                  Width="150"
-                  SelectionChanged="FilterChanged">
 
-            <ComboBoxItem Content="По имени"/>
-            <ComboBoxItem Content="По рейтингу"/>
+        <StackPanel Orientation="Horizontal">
 
-        </ComboBox>
+            <TextBox x:Name="SearchBox"
+                     Width="200"
+                     Margin="5"
+                     TextChanged="UpdateBooks"/>
 
-        <ComboBox x:Name="GenreBox"
-                  Width="150"
-                  SelectionChanged="FilterChanged"/>
+            <ComboBox x:Name="SortBox"
+                      Width="150"
+                      Margin="5"
+                      SelectionChanged="UpdateBooks">
 
-    </StackPanel>
+                <ComboBoxItem Content="По имени"/>
+                <ComboBoxItem Content="По рейтингу"/>
 
-    <ScrollViewer Grid.Row="1">
+            </ComboBox>
 
-        <ItemsControl x:Name="BooksList">
+            <ComboBox x:Name="GenreBox"
+                      Width="150"
+                      Margin="5"
+                      SelectionChanged="UpdateBooks"/>
 
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+        </StackPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
 
-                    <Border Width="180"
-                            Margin="10"
-                            BorderBrush="Gray"
-                            BorderThickness="1">
+        <ScrollViewer Grid.Row="1">
 
-                        <StackPanel>
+            <WrapPanel x:Name="BooksPanel"/>
 
-                            <Image Height="220"
-                                   Source="{Binding CoverUrl}"/>
+        </ScrollViewer>
 
-                            <TextBlock Text="{Binding Title}"
-                                       FontWeight="Bold"
-                                       Margin="5"/>
-
-                            <TextBlock Text="{Binding AverageRating}"
-                                       Margin="5"/>
-
-                            <Button Content="Открыть"
-                                    Tag="{Binding Id}"
-                                    Click="OpenBook_Click"/>
-
-                            <Button Content="Добавить в список"
-                                    Tag="{Binding Id}"
-                                    Click="AddToList_Click"/>
-
-                        </StackPanel>
-
-                    </Border>
-
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-
-        </ItemsControl>
-
-    </ScrollViewer>
+    </Grid>
 </Page>

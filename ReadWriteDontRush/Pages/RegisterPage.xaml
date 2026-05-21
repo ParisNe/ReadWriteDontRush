@@ -8,41 +8,38 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage" Background="White">
 
-    <Grid>
+    <ScrollViewer>
 
-        <StackPanel Width="350"
-                    VerticalAlignment="Center"
+        <StackPanel Width="300"
+                    Margin="20"
                     HorizontalAlignment="Center">
 
             <TextBlock Text="Регистрация"
-                       FontSize="24"
-                       Margin="0 0 0 20"/>
-
-            <TextBlock Text="Имя"/>
-            <TextBox x:Name="NameTb"
-                     Height="30"
-                     Margin="0 5 0 10"/>
+                       FontSize="22"
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"/>
 
             <TextBlock Text="Логин"/>
-            <TextBox x:Name="LoginTb"
-                     Height="30"
-                     Margin="0 5 0 10"/>
+            <TextBox x:Name="UsernameBox"
+                     Margin="0,5,0,10"/>
 
-            <TextBlock Text="Почта"/>
-            <TextBox x:Name="EmailTb"
-                     Height="30"
-                     Margin="0 5 0 10"/>
+            <TextBlock Text="Email"/>
+            <TextBox x:Name="EmailBox"
+                     Margin="0,5,0,10"/>
+
+            <TextBlock Text="Имя"/>
+            <TextBox x:Name="DisplayNameBox"
+                     Margin="0,5,0,10"/>
 
             <TextBlock Text="Пароль"/>
-            <PasswordBox x:Name="PasswordTb"
-                         Height="30"
-                         Margin="0 5 0 20"/>
+            <PasswordBox x:Name="PasswordBox"
+                         Margin="0,5,0,15"/>
 
             <Button Content="Создать аккаунт"
-                    Height="35"
-                    Click="RegisterBtn_Click"/>
+                    Height="30"
+                    Click="Register_Click"/>
 
         </StackPanel>
 
-    </Grid>
+    </ScrollViewer>
 </Page>

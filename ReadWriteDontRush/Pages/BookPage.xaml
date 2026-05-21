@@ -10,48 +10,75 @@
 
     <ScrollViewer>
 
-        <StackPanel Margin="20">
+        <StackPanel Margin="10">
 
-            <TextBlock x:Name="TitleTb"
-                       FontSize="28"
-                       Margin="0 0 0 20"/>
+            <Image x:Name="CoverImage"
+                   Width="150"
+                   Height="200"
+                   Margin="0,0,0,10"/>
 
-            <TextBlock Text="Описание"/>
+            <TextBlock x:Name="TitleText"
+                       FontSize="24"
+                       FontWeight="Bold"/>
 
-            <TextBox x:Name="DescTb"
-                     Height="100"
+            <TextBlock x:Name="AuthorText"
+                       Margin="0,5"/>
+
+            <TextBlock x:Name="GenresText"
+                       Margin="0,5"/>
+
+            <TextBlock x:Name="DescriptionText"
+                       TextWrapping="Wrap"
+                       Margin="0,10"/>
+
+            <TextBlock Text="Текст книги"
+                       FontWeight="Bold"
+                       Margin="0,10"/>
+
+            <TextBox x:Name="ContentText"
+                     Height="300"
                      IsReadOnly="True"
                      TextWrapping="Wrap"
-                     Margin="0 5 0 20"/>
+                     AcceptsReturn="True"/>
 
-            <TextBlock Text="Текст книги"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,10">
 
-            <TextBox x:Name="ContentTb"
-                     Height="250"
-                     AcceptsReturn="True"
+                <Button Content="Жалоба на книгу"
+                        Click="ComplainBook_Click"
+                        Margin="5"/>
+
+                <Button Content="Жалоба на автора"
+                        Click="ComplainAuthor_Click"
+                        Margin="5"/>
+
+            </StackPanel>
+
+            <TextBlock Text="Отзывы"
+                       FontSize="18"
+                       Margin="0,15,0,10"/>
+
+            <ItemsControl x:Name="ReviewsList"/>
+
+            <TextBlock Text="Добавить отзыв"
+                       Margin="0,15,0,5"/>
+
+            <ComboBox x:Name="RatingBox"
+                      Width="100"
+                      Margin="0,5"/>
+
+            <TextBox x:Name="ReviewText"
+                     Height="80"
                      TextWrapping="Wrap"
-                     Margin="0 5 0 20"/>
+                     AcceptsReturn="True"/>
 
-            <TextBlock Text="Отзывы"/>
-
-            <DataGrid x:Name="ReviewsGrid"
-                      Height="200"
-                      Margin="0 5 0 20"/>
-
-            <TextBlock Text="Ваш отзыв"/>
-
-            <TextBox x:Name="ReviewTb"
-                     Height="100"
-                     AcceptsReturn="True"
-                     Margin="0 5 0 20"/>
-
-            <Button Content="Добавить отзыв"
-                    Width="200"
-                    Height="35"
-                    Click="AddReviewBtn_Click"/>
+            <Button Content="Отправить"
+                    Margin="0,10"
+                    Click="SubmitReview_Click"/>
 
         </StackPanel>
 
     </ScrollViewer>
+
 
 </Page>

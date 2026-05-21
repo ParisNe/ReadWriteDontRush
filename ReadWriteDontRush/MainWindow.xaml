@@ -44,7 +44,7 @@
                     Height="60"
                     Margin="5"
                     ToolTip="Администрирование">
-                <Image Source="/Images/up4.png"/>
+                <Image Source="/Images/up4.jpg"/>
             </Button>
 
             <Button x:Name="FreezeBtn"
@@ -52,14 +52,14 @@
                     Height="60"
                     Margin="5"
                     ToolTip="Аккаунт заморожен">
-                <Image Source="/Images/freeze.png"/>
+                <Image Source="/Images/up5.jpg"/>
             </Button>
 
             <Button Click="Profile_Click"
                     Height="60"
                     Margin="5"
                     ToolTip="Профиль">
-                <Image Source="/Images/profile.png"/>
+                <Image Source="/Images/up7.jpg"/>
             </Button>
 
         </StackPanel>

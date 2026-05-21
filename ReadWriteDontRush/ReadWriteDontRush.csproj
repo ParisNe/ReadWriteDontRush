@@ -220,6 +220,8 @@
     <Resource Include="Images\up2.jpg" />
     <Resource Include="Images\up3.jpg" />
     <Resource Include="Images\up4.jpg" />
+    <Resource Include="Images\up5.jpg" />
+    <Resource Include="Images\up7.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
