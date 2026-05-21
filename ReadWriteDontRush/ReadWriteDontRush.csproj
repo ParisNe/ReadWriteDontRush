@@ -222,14 +222,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\up1.jpg" />
-    <Resource Include="Images\up2.jpg" />
-    <Resource Include="Images\up3.jpg" />
-    <Resource Include="Images\admin.jpg" />
-    <Resource Include="Images\frozen.jpg" />
-    <Resource Include="Images\profil.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\Catalog.png" />
+    <Resource Include="Images\list.png" />
+    <Resource Include="Images\Profile.png" />
+    <Resource Include="Images\frozen.png" />
+    <Resource Include="Images\author.png" />
+    <Resource Include="Images\Books.png" />
+    <Resource Include="Images\admin.png" />
     <Content Include="Model2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model2.edmx</DependentUpon>

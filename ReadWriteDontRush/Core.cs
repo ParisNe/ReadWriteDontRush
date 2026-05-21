@@ -9,5 +9,7 @@ namespace ReadWriteDontRush
     internal class Core
     {
         public static BookPlatformEntities Context = new BookPlatformEntities();
+        public static Users CurrentUser { get; set; }
+
     }
 }

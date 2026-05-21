@@ -9,6 +9,9 @@
       Title="BookPage" Background="White">
 
     <Grid>
-        
+        <TextBlock Text="Страница списков книг (в разработке)" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   FontSize="20"/>
     </Grid>
 </Page>

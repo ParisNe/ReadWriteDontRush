@@ -8,7 +8,115 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogPage" Background="White">
 
+    <Page.Resources>
+        <Style x:Key="BookCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.15"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель фильтров -->
+        <Border Grid.Row="0" Background="White" Padding="15" Margin="0,0,0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <TextBlock Text="🔍 Поиск" FontSize="12" Foreground="Gray"/>
+                    <TextBox x:Name="TxtSearch" Height="35" Margin="0,5,0,0"
+                             TextChanged="TxtSearch_TextChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                    <TextBlock Text="📊 Сортировка" FontSize="12" Foreground="Gray"/>
+                    <ComboBox x:Name="CmbSort" Height="35" SelectedIndex="0"
+                              SelectionChanged="CmbSort_SelectionChanged">
+                        <ComboBoxItem Content="По названию (А-Я)"/>
+                        <ComboBoxItem Content="По названию (Я-А)"/>
+                        <ComboBoxItem Content="По рейтингу (сначала высокий)"/>
+                        <ComboBoxItem Content="По рейтингу (сначала низкий)"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="🎭 Жанр" FontSize="12" Foreground="Gray"/>
+                    <ComboBox x:Name="CmbGenre" Height="35"
+                              SelectionChanged="CmbGenre_SelectionChanged"/>
+                </StackPanel>
+
+                <Button x:Name="BtnReset" Grid.Column="3" Content="Сбросить" 
+                        Width="80" Height="35" Margin="10,22,0,0"
+                        Background="#E74C3C" Foreground="White"
+                        Click="BtnReset_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Список книг -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="BooksItemsControl" Margin="10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="220" Style="{StaticResource BookCardStyle}">
+                            <StackPanel>
+                                <!-- Обложка -->
+                                <Border Height="280" Background="#ECF0F1" CornerRadius="8,8,0,0">
+                                    <Image Width="200" Height="260" Margin="10"
+                                           Stretch="UniformToFill"/>
+                                </Border>
+
+                                <!-- Информация -->
+                                <StackPanel Margin="12" Height="140">
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" 
+                                               FontSize="14" TextWrapping="Wrap"
+                                               Margin="0,0,0,5"/>
+
+                                    <TextBlock Text="{Binding Users.DisplayName}" 
+                                               FontSize="11" Foreground="Gray"
+                                               Margin="0,0,0,5"/>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="★" Foreground="Gold" FontSize="14"/>
+                                        <TextBlock Text="{Binding AverageRating, StringFormat={}{0:F1}}" 
+                                                   FontSize="12" Margin="5,0,0,0"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <Button Content="📖 Читать" Width="90" Height="30"
+                                                Background="#3498DB" Foreground="White"
+                                                Click="BtnRead_Click" Tag="{Binding}"/>
+                                        <Button Content="📋 В список" Width="90" Height="30"
+                                                Margin="5,0,0,0" Background="#2C3E50" 
+                                                Foreground="White" Click="BtnAddToList_Click" 
+                                                Tag="{Binding}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

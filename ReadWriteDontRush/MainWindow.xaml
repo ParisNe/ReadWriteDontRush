@@ -6,66 +6,67 @@
         xmlns:local="clr-namespace:ReadWriteDontRush"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Background="#202225">
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#2C3E50" x:Name="SideBarMenu" Visibility="Collapsed">
+            <StackPanel Margin="0,20,0,0">
+                <!-- Каталог книг -->
+                <Button x:Name="BtnCatalog" Click="BtnCatalog_Click">
+                    <Button.ToolTip>Каталог книг</Button.ToolTip>
+                    <StackPanel>
+                        <Image Source="/Images/Books.png" Width="32" Height="32"/>
+                    </StackPanel>
+                </Button>
 
-            <Button Click="Catalog_Click"
-                    Height="60"
-                    Margin="5"
-                    ToolTip="Каталог книг">
-                <Image Source="/Images/up2.jpg"/>
-            </Button>
+                <!-- Списки книг -->
+                <Button x:Name="BtnBookLists" Click="BtnBookLists_Click">
+                    <Button.ToolTip>Списки книг</Button.ToolTip>
+                    <StackPanel>
+                        <Image Source="/Images/list.png" Width="32" Height="32"/>
+                    </StackPanel>
+                </Button>
 
-            <Button Click="Lists_Click"
-                    Height="60"
-                    Margin="5"
-                    ToolTip="Списки книг">
-                <Image Source="/Images/up3.jpg"/>
-            </Button>
+                <!-- Страница автора -->
+                <Button x:Name="BtnAuthor" Click="BtnAuthor_Click" Visibility="Collapsed">
+                    <Button.ToolTip>Страница автора</Button.ToolTip>
+                    <StackPanel>
+                        <Image Source="/Images/author.png" Width="32" Height="32"/>
+                    </StackPanel>
+                </Button>
 
-            
-            <Button x:Name="AuthorBtn"
-                    Visibility="Collapsed"
-                    Click="Author_Click"
-                    Height="60"
-                    Margin="5"
-                    ToolTip="Страница автора">
-                <Image Source="/Images/author.png"/>
-            </Button>
+                <!-- Администрирование -->
+                <Button x:Name="BtnAdmin" Click="BtnAdmin_Click" Visibility="Collapsed">
+                    <Button.ToolTip>Администрирование</Button.ToolTip>
+                    <StackPanel>
+                        <Image Source="/Images/admin.png" Width="32" Height="32"/>
+                    </StackPanel>
+                </Button>
 
-            <Button x:Name="AdminBtn"
-                    Visibility="Collapsed"
-                    Click="Admin_Click"
-                    Height="60"
-                    Margin="5"
-                    ToolTip="Администрирование">
-                <Image Source="/Images/admin.jpg"/>
-            </Button>
+                <!-- Предупреждение о заморозке -->
+                <Button x:Name="BtnWarning" Click="BtnWarning_Click" Visibility="Collapsed">
+                    <Button.ToolTip>Аккаунт заморожен</Button.ToolTip>
+                    <StackPanel>
+                        <Image Source="/Images/frozen.png" Width="32" Height="32"/>
+                    </StackPanel>
+                </Button>
 
-            <Button x:Name="FreezeBtn"
-                    Visibility="Collapsed"
-                    Height="60"
-                    Margin="5"
-                    ToolTip="Аккаунт заморожен">
-                <Image Source="/Images/frozen.jpg"/>
-            </Button>
+                <!-- Профиль -->
+                <Button x:Name="BtnProfile" Click="BtnProfile_Click">
+                    <Button.ToolTip>Профиль</Button.ToolTip>
+                    <StackPanel>
+                        <Image Source="/Images/profile.png" Width="32" Height="32"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
 
-            <Button Click="Profile_Click"
-                    Height="60"
-                    Margin="5"
-                    ToolTip="Профиль">
-                <Image Source="/Images/profil.jpg"/>
-            </Button>
-
-        </StackPanel>
-
-        <Frame x:Name="MainFrame"
-               Grid.Column="1"
-               NavigationUIVisibility="Hidden"/>
+        <!-- Main Content Frame -->
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
     </Grid>
 </Window>
