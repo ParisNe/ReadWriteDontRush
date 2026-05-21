@@ -64,47 +64,50 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AuthorRequests.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookListItems.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+    <Compile Include="BookGenres.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookLists.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+    <Compile Include="BookListTypes.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Books.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Complaints.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ComplaintTypes.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="Genres.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model67.Context.cs">
+    <Compile Include="Model2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model67.Context.tt</DependentUpon>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model67.cs">
+    <Compile Include="Model2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model67.Designer.cs">
+    <Compile Include="Model2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model67.edmx</DependentUpon>
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddEditBookPage.xaml.cs">
+      <DependentUpon>AddEditBookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AuthorPage.xaml.cs">
       <DependentUpon>AuthorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BookListsPage.xaml.cs">
+      <DependentUpon>BookListsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
@@ -115,26 +118,26 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProfilePage.xaml.cs">
-      <DependentUpon>ProfilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RegisterPage.xaml.cs">
-      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    <Compile Include="Pages\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reviews.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="UnfreezeRequests.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserBookLists.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
-      <DependentUpon>Model67.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -148,11 +151,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddEditBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AuthorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BookListsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,11 +179,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ProfilePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\RegisterPage.xaml">
+    <Page Include="Pages\UserProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,12 +202,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model67.edmx">
+    <EntityDeploy Include="Model2.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model67.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model67.edmx.diagram">
-      <DependentUpon>Model67.edmx</DependentUpon>
+    <None Include="Model2.edmx.diagram">
+      <DependentUpon>Model2.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -218,21 +225,22 @@
     <Resource Include="Images\up1.jpg" />
     <Resource Include="Images\up2.jpg" />
     <Resource Include="Images\up3.jpg" />
-    <Resource Include="Images\up4.jpg" />
-    <Resource Include="Images\up5.jpg" />
-    <Resource Include="Images\up7.jpg" />
+    <Resource Include="Images\admin.jpg" />
+    <Resource Include="Images\frozen.jpg" />
+    <Resource Include="Images\profil.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model67.Context.tt">
+    <Content Include="Model2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model67.edmx</DependentUpon>
-      <LastGenOutput>Model67.Context.cs</LastGenOutput>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model67.tt">
+    <Content Include="Model2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model67.edmx</DependentUpon>
-      <LastGenOutput>Model67.cs</LastGenOutput>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

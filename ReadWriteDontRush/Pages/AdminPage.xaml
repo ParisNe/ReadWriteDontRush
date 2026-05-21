@@ -8,36 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminPage" Background="White">
 
-    <TabControl Margin="10">
-
-        <TabItem Header="Жалобы">
-
-            <DataGrid x:Name="ComplaintsGrid"
-                  AutoGenerateColumns="True"/>
-
-        </TabItem>
-
-        <TabItem Header="Разморозка">
-
-            <DataGrid x:Name="UnfreezeGrid"
-                  AutoGenerateColumns="True"/>
-
-        </TabItem>
-
-        <TabItem Header="Авторы">
-
-            <DataGrid x:Name="AuthorRequestsGrid"
-                  AutoGenerateColumns="True"/>
-
-        </TabItem>
-
-        <TabItem Header="Пользователи">
-
-            <DataGrid x:Name="UsersGrid"
-                  AutoGenerateColumns="True"/>
-
-        </TabItem>
-
-    </TabControl>
-
+    <Grid>
+        
+    </Grid>
 </Page>

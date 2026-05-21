@@ -13,10 +13,10 @@ namespace ReadWriteDontRush
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ReadWriteAppEntities67 : DbContext
+    public partial class BookPlatformEntities : DbContext
     {
-        public ReadWriteAppEntities67()
-            : base("name=ReadWriteAppEntities67")
+        public BookPlatformEntities()
+            : base("name=BookPlatformEntities")
         {
         }
     
@@ -26,16 +26,16 @@ namespace ReadWriteDontRush
         }
     
         public virtual DbSet<AuthorRequests> AuthorRequests { get; set; }
-        public virtual DbSet<BookListItems> BookListItems { get; set; }
-        public virtual DbSet<BookLists> BookLists { get; set; }
+        public virtual DbSet<BookGenres> BookGenres { get; set; }
+        public virtual DbSet<BookListTypes> BookListTypes { get; set; }
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Complaints> Complaints { get; set; }
-        public virtual DbSet<ComplaintTypes> ComplaintTypes { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Reviews> Reviews { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UnfreezeRequests> UnfreezeRequests { get; set; }
+        public virtual DbSet<UserBookLists> UserBookLists { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

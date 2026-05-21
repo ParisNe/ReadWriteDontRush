@@ -14,12 +14,11 @@ namespace ReadWriteDontRush
     
     public partial class UnfreezeRequests
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public string TargetType { get; set; }
-        public Nullable<int> TargetBookId { get; set; }
-        public Nullable<int> TargetReviewId { get; set; }
-        public string Message { get; set; }
+        public int RequestID { get; set; }
+        public int UserID { get; set; }
+        public Nullable<int> BookID { get; set; }
+        public Nullable<int> ReviewID { get; set; }
+        public string Reason { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
     

@@ -8,57 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AuthorPage" Background="White">
 
-    <TabControl Margin="10">
-
-        <TabItem Header="Мои книги">
-
-            <ListBox x:Name="BooksList"/>
-
-        </TabItem>
-
-        <TabItem Header="Добавить книгу">
-
-            <ScrollViewer>
-
-                <StackPanel Margin="10">
-
-                    <TextBlock Text="Название"/>
-                    <TextBox x:Name="TitleBox"
-                             Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Описание"/>
-                    <TextBox x:Name="DescriptionBox"
-                             Height="80"
-                             TextWrapping="Wrap"
-                             Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Обложка URL"/>
-                    <TextBox x:Name="CoverBox"
-                             Margin="0,5,0,10"/>
-
-                    <TextBlock Text="Текст книги"/>
-                    <TextBox x:Name="ContentBox"
-                             Height="200"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap"
-                             Margin="0,5,0,10"/>
-
-                    <Button Content="Добавить книгу"
-                            Height="30"
-                            Click="AddBook_Click"/>
-
-                </StackPanel>
-
-            </ScrollViewer>
-
-        </TabItem>
-
-        <TabItem Header="Замороженные">
-
-            <ListBox x:Name="FrozenBooksList"/>
-
-        </TabItem>
-
-    </TabControl>
-
+    <Grid>
+        
+    </Grid>
 </Page>

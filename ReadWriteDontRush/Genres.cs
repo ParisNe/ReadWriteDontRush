@@ -17,13 +17,13 @@ namespace ReadWriteDontRush
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Genres()
         {
-            this.Books = new HashSet<Books>();
+            this.BookGenres = new HashSet<BookGenres>();
         }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int GenreID { get; set; }
+        public string GenreName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Books> Books { get; set; }
+        public virtual ICollection<BookGenres> BookGenres { get; set; }
     }
 }

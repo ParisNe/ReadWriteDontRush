@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ReadWriteDontRush.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorPage.xaml
+    /// Логика взаимодействия для BookListsPage.xaml
     /// </summary>
-    public partial class AuthorPage : Page
+    public partial class BookListsPage : Page
     {
-        public AuthorPage()
+        public BookListsPage()
         {
             InitializeComponent();
         }

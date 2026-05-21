@@ -21,11 +21,11 @@ namespace ReadWriteDontRush
             this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
         }
     
-        public int Id { get; set; }
-        public int BookId { get; set; }
-        public int UserId { get; set; }
+        public int ReviewID { get; set; }
+        public int UserID { get; set; }
+        public int BookID { get; set; }
+        public string ReviewText { get; set; }
         public int Rating { get; set; }
-        public string Comment { get; set; }
         public Nullable<bool> IsFrozen { get; set; }
         public string FreezeReason { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }

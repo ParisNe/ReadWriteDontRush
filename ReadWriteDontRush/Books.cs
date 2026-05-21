@@ -17,27 +17,26 @@ namespace ReadWriteDontRush
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Books()
         {
-            this.BookListItems = new HashSet<BookListItems>();
+            this.BookGenres = new HashSet<BookGenres>();
             this.Complaints = new HashSet<Complaints>();
             this.Reviews = new HashSet<Reviews>();
             this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
-            this.Genres = new HashSet<Genres>();
+            this.UserBookLists = new HashSet<UserBookLists>();
         }
     
-        public int Id { get; set; }
+        public int BookID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string CoverUrl { get; set; }
-        public int AuthorId { get; set; }
-        public string TextContent { get; set; }
-        public Nullable<decimal> AverageRating { get; set; }
+        public string Content { get; set; }
+        public string CoverImagePath { get; set; }
+        public int AuthorID { get; set; }
+        public Nullable<double> AverageRating { get; set; }
         public Nullable<bool> IsFrozen { get; set; }
         public string FreezeReason { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookListItems> BookListItems { get; set; }
+        public virtual ICollection<BookGenres> BookGenres { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaints> Complaints { get; set; }
@@ -46,6 +45,6 @@ namespace ReadWriteDontRush
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnfreezeRequests> UnfreezeRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Genres> Genres { get; set; }
+        public virtual ICollection<UserBookLists> UserBookLists { get; set; }
     }
 }

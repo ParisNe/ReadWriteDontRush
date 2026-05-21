@@ -8,7 +8,6 @@ namespace ReadWriteDontRush
 {
     internal class Core
     {
-        public static ReadWriteAppEntities67 Context = new ReadWriteAppEntities67();
-
+        public static BookPlatformEntities Context = new BookPlatformEntities();
     }
 }

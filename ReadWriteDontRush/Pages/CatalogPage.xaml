@@ -8,44 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogPage" Background="White">
 
-    <Grid Margin="10">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-
-        <StackPanel Orientation="Horizontal">
-
-            <TextBox x:Name="SearchBox"
-                     Width="200"
-                     Margin="5"
-                     TextChanged="UpdateBooks"/>
-
-            <ComboBox x:Name="SortBox"
-                      Width="150"
-                      Margin="5"
-                      SelectionChanged="UpdateBooks">
-
-                <ComboBoxItem Content="По имени"/>
-                <ComboBoxItem Content="По рейтингу"/>
-
-            </ComboBox>
-
-            <ComboBox x:Name="GenreBox"
-                      Width="150"
-                      Margin="5"
-                      SelectionChanged="UpdateBooks"/>
-
-        </StackPanel>
-
-
-        <ScrollViewer Grid.Row="1">
-
-            <WrapPanel x:Name="BooksPanel"/>
-
-        </ScrollViewer>
-
+    <Grid>
+        
     </Grid>
 </Page>

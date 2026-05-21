@@ -12,18 +12,16 @@ namespace ReadWriteDontRush
     using System;
     using System.Collections.Generic;
     
-    public partial class ComplaintTypes
+    public partial class UserBookLists
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ComplaintTypes()
-        {
-            this.Complaints = new HashSet<Complaints>();
-        }
+        public int UserBookListID { get; set; }
+        public int UserID { get; set; }
+        public int BookID { get; set; }
+        public int ListTypeID { get; set; }
+        public Nullable<System.DateTime> AddedAt { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Complaints> Complaints { get; set; }
+        public virtual BookListTypes BookListTypes { get; set; }
+        public virtual Books Books { get; set; }
+        public virtual Users Users { get; set; }
     }
 }
