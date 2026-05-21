@@ -7,45 +7,65 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Background="LightGray">
+        <StackPanel Background="#202225">
 
-            <Button x:Name="CatalogBtn"
-                    Content="Каталог"
-                    Height="40"
-                    Margin="10"
-                    Click="CatalogBtn_Click"/>
+            <Button Click="Catalog_Click"
+                    Height="60"
+                    Margin="5"
+                    ToolTip="Каталог книг">
+                <Image Source="/Images/up2.jpg"/>
+            </Button>
 
-            <Button x:Name="ProfileBtn"
-                    Content="Профиль"
-                    Height="40"
-                    Margin="10"
-                    Click="ProfileBtn_Click"/>
+            <Button Click="Lists_Click"
+                    Height="60"
+                    Margin="5"
+                    ToolTip="Списки книг">
+                <Image Source="/Images/up3.jpg"/>
+            </Button>
 
+            
             <Button x:Name="AuthorBtn"
-                    Content="Автор"
-                    Height="40"
-                    Margin="10"
                     Visibility="Collapsed"
-                    Click="AuthorBtn_Click"/>
+                    Click="Author_Click"
+                    Height="60"
+                    Margin="5"
+                    ToolTip="Страница автора">
+                <Image Source="/Images/author.png"/>
+            </Button>
 
             <Button x:Name="AdminBtn"
-                    Content="Админ"
-                    Height="40"
-                    Margin="10"
                     Visibility="Collapsed"
-                    Click="AdminBtn_Click"/>
+                    Click="Admin_Click"
+                    Height="60"
+                    Margin="5"
+                    ToolTip="Администрирование">
+                <Image Source="/Images/up4.png"/>
+            </Button>
+
+            <Button x:Name="FreezeBtn"
+                    Visibility="Collapsed"
+                    Height="60"
+                    Margin="5"
+                    ToolTip="Аккаунт заморожен">
+                <Image Source="/Images/freeze.png"/>
+            </Button>
+
+            <Button Click="Profile_Click"
+                    Height="60"
+                    Margin="5"
+                    ToolTip="Профиль">
+                <Image Source="/Images/profile.png"/>
+            </Button>
 
         </StackPanel>
 
         <Frame x:Name="MainFrame"
                Grid.Column="1"
                NavigationUIVisibility="Hidden"/>
-
     </Grid>
 </Window>

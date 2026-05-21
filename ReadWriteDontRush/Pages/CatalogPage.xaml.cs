@@ -30,19 +30,14 @@ namespace ReadWriteDontRush.Pages
         private void LoadBooks()
         {
             BooksGrid.ItemsSource =
-                Core.Context.Books.ToList();
-        }
-
-        private void BooksGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Books selectedBook =
-                BooksGrid.SelectedItem as Books;
-
-            if (selectedBook != null)
-            {
-                NavigationService.Navigate(
-                    new BookPage(selectedBook));
-            }
+                Core.Context.Books
+                .Select(x => new
+                {
+                    x.Title,
+                    x.Description,
+                    x.AverageRating
+                })
+                .ToList();
         }
     }
 }

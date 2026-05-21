@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ReadWriteDontRush.Pages
 {
@@ -25,27 +26,24 @@ namespace ReadWriteDontRush.Pages
             InitializeComponent();
         }
 
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
             var user = Core.Context.Users.FirstOrDefault(x =>
-                x.Username == LoginTb.Text &&
-                x.PasswordHash == PasswordTb.Password);
+                x.Username == UsernameBox.Text &&
+                x.PasswordHash == PasswordBox.Password);
 
-            if (user != null)
+            if (user == null)
             {
-                App.CurrentUser = user;
-
-                MessageBox.Show("Успешный вход");
-
-                MainWindow main =
-                    (MainWindow)Application.Current.MainWindow;
-
-                main.OpenCatalog();
+                ErrorText.Text = "Неверный логин или пароль";
+                return;
             }
-            else
-            {
-                MessageBox.Show("Неверный логин или пароль");
-            }
+
+            Session.CurrentUser = user;
+
+            var window = (MainWindow)Application.Current.MainWindow;
+            window.UpdateSidebar();
+
+            window.MainFrame.Navigate(new CatalogPage());
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)

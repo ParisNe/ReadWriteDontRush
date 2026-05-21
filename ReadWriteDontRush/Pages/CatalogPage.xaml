@@ -8,30 +8,74 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatalogPage" Background="White">
 
-    <Grid Margin="10">
+    <StackPanel Orientation="Horizontal">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <TextBox x:Name="SearchBox"
+                 Width="200"
+                 Margin="5"
+                 TextChanged="FilterChanged"/>
 
-        <StackPanel Orientation="Horizontal">
+        <ComboBox x:Name="SortBox"
+                  Width="150"
+                  SelectionChanged="FilterChanged">
 
-            <TextBox Width="250"
-                     Height="30"
-                     Margin="0 0 10 0"/>
+            <ComboBoxItem Content="По имени"/>
+            <ComboBoxItem Content="По рейтингу"/>
 
-            <Button Content="Поиск"
-                    Width="100"
-                    Height="30"/>
+        </ComboBox>
 
-        </StackPanel>
+        <ComboBox x:Name="GenreBox"
+                  Width="150"
+                  SelectionChanged="FilterChanged"/>
 
-        <DataGrid x:Name="BooksGrid"
-                  Grid.Row="1"
-                  Margin="0 10 0 0"
-                  AutoGenerateColumns="True"
-                  SelectionChanged="BooksGrid_SelectionChanged"/>
+    </StackPanel>
 
-    </Grid>
+    <ScrollViewer Grid.Row="1">
+
+        <ItemsControl x:Name="BooksList">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+
+                    <Border Width="180"
+                            Margin="10"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+
+                        <StackPanel>
+
+                            <Image Height="220"
+                                   Source="{Binding CoverUrl}"/>
+
+                            <TextBlock Text="{Binding Title}"
+                                       FontWeight="Bold"
+                                       Margin="5"/>
+
+                            <TextBlock Text="{Binding AverageRating}"
+                                       Margin="5"/>
+
+                            <Button Content="Открыть"
+                                    Tag="{Binding Id}"
+                                    Click="OpenBook_Click"/>
+
+                            <Button Content="Добавить в список"
+                                    Tag="{Binding Id}"
+                                    Click="AddToList_Click"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+
+    </ScrollViewer>
 </Page>
