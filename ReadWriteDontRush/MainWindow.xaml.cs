@@ -45,10 +45,13 @@ namespace ReadWriteDontRush
                 // Страница автора (RoleID = 3)
                 BtnAuthor.Visibility = Core.CurrentUser.RoleID == 3 ? Visibility.Visible : Visibility.Collapsed;
 
-                // Предупреждение о заморозке
-                BtnWarning.Visibility = Core.CurrentUser.IsFrozen == true ? Visibility.Visible : Visibility.Collapsed;
+                // Предупреждение о заморозке - исправлено с учетом nullable типа
+                bool isFrozen = Core.CurrentUser.IsFrozen.HasValue && Core.CurrentUser.IsFrozen.Value;
+                BtnWarning.Visibility = isFrozen ? Visibility.Visible : Visibility.Collapsed;
             }
         }
+
+
 
         private void BtnCatalog_Click(object sender, RoutedEventArgs e)
         {
@@ -100,5 +103,6 @@ namespace ReadWriteDontRush
         {
             SetupSidebar();
         }
+
     }
 }

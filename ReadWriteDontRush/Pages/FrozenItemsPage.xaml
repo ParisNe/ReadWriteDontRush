@@ -1,0 +1,75 @@
+﻿<Page x:Class="ReadWriteDontRush.Pages.FrozenItemsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReadWriteDontRush.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Замороженные элементы" Background="#F5F5F5">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="🔒 Замороженные элементы" FontSize="22" FontWeight="Bold" 
+                   Margin="0,0,0,20" Foreground="#2C3E50"/>
+
+        <!-- Фильтр по типу -->
+        <WrapPanel Grid.Row="1" Margin="0,0,0,15">
+            <RadioButton x:Name="RbAll" Content="Все" GroupName="Filter" IsChecked="True"
+                         Margin="0,0,10,0" Checked="Filter_Changed"/>
+            <RadioButton x:Name="RbBooks" Content="Книги" GroupName="Filter" 
+                         Margin="0,0,10,0" Checked="Filter_Changed"/>
+            <RadioButton x:Name="RbUsers" Content="Пользователи" GroupName="Filter" 
+                         Margin="0,0,10,0" Checked="Filter_Changed"/>
+            <RadioButton x:Name="RbReviews" Content="Отзывы" GroupName="Filter" 
+                         Margin="0,0,10,0" Checked="Filter_Changed"/>
+        </WrapPanel>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="FrozenItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="8" Padding="15" 
+                                Margin="0,0,0,10" >
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" Width="40" Height="40" CornerRadius="20" 
+                                            Background="{Binding TypeColor}" Margin="0,0,10,0"/>
+
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock FontWeight="Bold" FontSize="14">
+                                            <Run Text="{Binding Type}"/>
+                                            <Run Text=": "/>
+                                            <Run Text="{Binding Name}" Foreground="#2C3E50"/>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Reason}" FontSize="11" Foreground="Gray" 
+                                                   TextWrapping="Wrap" Margin="0,5,0,0"/>
+                                    </StackPanel>
+
+                                    <Button Grid.Column="2" Content="Разморозить" Width="100" Height="30"
+                                            Background="#27AE60" Foreground="White"
+                                            Click="Unfreeze_Click" Tag="{Binding}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBlock x:Name="TxtNoItems" Grid.Row="2" Text="Нет замороженных элементов" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   FontSize="16" Foreground="Gray" Visibility="Collapsed"/>
+    </Grid>
+</Page>

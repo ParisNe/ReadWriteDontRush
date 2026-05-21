@@ -8,8 +8,46 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminPage" Background="White">
 
-    <Grid Background="White">
-        <TextBlock Text="Страница администрирования (в разработке)" 
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+    <Page.Resources>
+        <Style x:Key="AdminMenuButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#34495E"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковое меню -->
+        <Border Grid.Column="0" Background="#2C3E50">
+            <StackPanel Margin="0,20,0,0">
+                <Button x:Name="BtnComplaints" Content="📋 Жалобы" Style="{StaticResource AdminMenuButton}"
+                        Click="BtnComplaints_Click"/>
+                <Button x:Name="BtnUnfreezeRequests" Content="❄️ Заявки на разморозку" Style="{StaticResource AdminMenuButton}"
+                        Click="BtnUnfreezeRequests_Click"/>
+                <Button x:Name="BtnAuthorRequests" Content="✍️ Заявки авторов" Style="{StaticResource AdminMenuButton}"
+                        Click="BtnAuthorRequests_Click"/>
+                <Button x:Name="BtnFrozenItems" Content="🔒 Замороженные элементы" Style="{StaticResource AdminMenuButton}"
+                        Click="BtnFrozenItems_Click"/>
+                <Button x:Name="BtnUsers" Content="👥 Пользователи" Style="{StaticResource AdminMenuButton}"
+                        Click="BtnUsers_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Контент -->
+        <Frame x:Name="AdminContentFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>
