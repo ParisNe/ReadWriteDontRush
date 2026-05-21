@@ -87,8 +87,8 @@ namespace ReadWriteDontRush.Pages
             if (currentBook.Users != null)
                 TxtAuthor.Text = $"Автор: {currentBook.Users.DisplayName}";
 
-            // Жанры
-            var genres = currentBook.BookGenres.Select(bg => bg.Genre.GenreName).ToList();
+            // Жанры - ИСПРАВЛЕНО: используем Genres вместо Genre
+            var genres = currentBook.BookGenres.Select(bg => bg.Genres.GenreName).ToList();
             TxtGenres.Text = genres.Any() ? $"Жанры: {string.Join(", ", genres)}" : "Жанры не указаны";
 
             // Рейтинг
@@ -109,7 +109,7 @@ namespace ReadWriteDontRush.Pages
         private void LoadReviews()
         {
             var reviews = Core.Context.Reviews
-                .Where(r => r.BookID == bookId && r.IsFrozen == false)
+                .Where(r => r.BookID == bookId && (r.IsFrozen == false || r.IsFrozen == null))
                 .Select(r => new
                 {
                     r.ReviewID,

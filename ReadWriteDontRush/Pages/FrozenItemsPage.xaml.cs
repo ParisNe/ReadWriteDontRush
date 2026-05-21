@@ -20,20 +20,29 @@ namespace ReadWriteDontRush.Pages
     /// </summary>
     public partial class FrozenItemsPage : Page
     {
-        private dynamic allItems;
+        private List<FrozenItem> allItems;
 
-        public FrozenItemsPage(dynamic items)
+        public class FrozenItem
+        {
+            public string Type { get; set; }
+            public string Name { get; set; }
+            public string Reason { get; set; }
+            public int Id { get; set; }
+            public Brush TypeColor { get; set; }
+        }
+
+        public FrozenItemsPage(List<object> items)
         {
             InitializeComponent();
-            allItems = items;
 
-            // Добавляем цвета для типов
-            var itemsWithColor = new List<dynamic>();
-            foreach (var item in items)
+            // Конвертируем в типизированный список
+            allItems = new List<FrozenItem>();
+            foreach (dynamic item in items)
             {
-                string color = item.Type == "Книга" ? "#3498DB" :
-                              (item.Type == "Пользователь" ? "#E74C3C" : "#F39C12");
-                itemsWithColor.Add(new
+                string type = item.Type;
+                string color = type == "Книга" ? "#3498DB" :
+                              (type == "Пользователь" ? "#E74C3C" : "#F39C12");
+                allItems.Add(new FrozenItem
                 {
                     Type = item.Type,
                     Name = item.Name,
@@ -42,13 +51,13 @@ namespace ReadWriteDontRush.Pages
                     TypeColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color))
                 });
             }
-            allItems = itemsWithColor;
+
             LoadItems();
         }
 
         private void LoadItems(string filter = "All")
         {
-            var filtered = new List<dynamic>();
+            List<FrozenItem> filtered;
 
             switch (filter)
             {
@@ -62,7 +71,7 @@ namespace ReadWriteDontRush.Pages
                     filtered = allItems.Where(i => i.Type == "Отзыв").ToList();
                     break;
                 default:
-                    filtered = allItems;
+                    filtered = allItems.ToList();
                     break;
             }
 
@@ -82,7 +91,7 @@ namespace ReadWriteDontRush.Pages
         private void Filter_Changed(object sender, RoutedEventArgs e)
         {
             var radio = sender as RadioButton;
-            if (radio.IsChecked == true)
+            if (radio != null && radio.IsChecked == true)
             {
                 if (radio == RbAll) LoadItems("All");
                 else if (radio == RbBooks) LoadItems("Books");
@@ -94,37 +103,35 @@ namespace ReadWriteDontRush.Pages
         private void Unfreeze_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var item = button.Tag;
+            var item = button?.Tag as FrozenItem;
+            if (item == null) return;
 
-            var result = MessageBox.Show($"Разморозить {item.GetType().GetProperty("Type").GetValue(item)} '{item.GetType().GetProperty("Name").GetValue(item)}'?",
+            var result = MessageBox.Show($"Разморозить {item.Type} '{item.Name}'?",
                                         "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
-                string type = item.GetType().GetProperty("Type").GetValue(item);
-                int id = item.GetType().GetProperty("Id").GetValue(item);
-
-                if (type == "Книга")
+                if (item.Type == "Книга")
                 {
-                    var book = Core.Context.Books.Find(id);
+                    var book = Core.Context.Books.Find(item.Id);
                     if (book != null)
                     {
                         book.IsFrozen = false;
                         book.FreezeReason = null;
                     }
                 }
-                else if (type == "Пользователь")
+                else if (item.Type == "Пользователь")
                 {
-                    var user = Core.Context.Users.Find(id);
+                    var user = Core.Context.Users.Find(item.Id);
                     if (user != null)
                     {
                         user.IsFrozen = false;
                         user.FreezeReason = null;
                     }
                 }
-                else if (type == "Отзыв")
+                else if (item.Type == "Отзыв")
                 {
-                    var review = Core.Context.Reviews.Find(id);
+                    var review = Core.Context.Reviews.Find(item.Id);
                     if (review != null)
                     {
                         review.IsFrozen = false;
@@ -135,7 +142,13 @@ namespace ReadWriteDontRush.Pages
                 Core.Context.SaveChanges();
                 MessageBox.Show("Элемент разморожен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                NavigationService?.Refresh();
+                // Обновляем страницу
+                var adminPage = (Application.Current.MainWindow as MainWindow)?.MainFrame.Content as AdminPage;
+                if (adminPage != null)
+                {
+                    var method = adminPage.GetType().GetMethod("LoadFrozenItems");
+                    method?.Invoke(adminPage, null);
+                }
             }
         }
     }

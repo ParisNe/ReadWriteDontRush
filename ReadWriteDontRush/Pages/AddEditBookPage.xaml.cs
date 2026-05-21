@@ -143,11 +143,6 @@ namespace ReadWriteDontRush.Pages
                 editingBook.IsFrozen = false;
                 editingBook.CreatedAt = DateTime.Now;
 
-                if (!isEditMode)
-                {
-                    editingBook.ViewsCount = 0;
-                }
-
                 // Обновляем жанры
                 if (isEditMode)
                 {

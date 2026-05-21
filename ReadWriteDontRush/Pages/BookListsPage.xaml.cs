@@ -132,7 +132,7 @@ namespace ReadWriteDontRush.Pages
                 CoverImagePath = b.CoverImagePath,
                 AuthorName = b.Users?.DisplayName ?? "Неизвестный автор",
                 AverageRating = b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) : 0,
-                GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genre.GenreName)),
+                GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genres.GenreName)),
                 CurrentListTypeId = currentListTypeId
             }).ToList();
 

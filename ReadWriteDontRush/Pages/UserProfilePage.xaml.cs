@@ -53,8 +53,7 @@ namespace ReadWriteDontRush.Pages
             string roleName = user.RoleID == 1 ? "Администратор" :
                              (user.RoleID == 2 ? "Пользователь" : "Автор");
             TxtRole.Text = roleName;
-            TxtCreatedAt.Text = user.CreatedAt.ToString("dd.MM.yyyy");
-
+            TxtCreatedAt.Text = user.CreatedAt.HasValue ? user.CreatedAt.Value.ToString("dd.MM.yyyy") : "Дата не указана";
             // Исправлено: проверка на null
             bool isFrozen = user.IsFrozen.HasValue && user.IsFrozen.Value;
             if (isFrozen)

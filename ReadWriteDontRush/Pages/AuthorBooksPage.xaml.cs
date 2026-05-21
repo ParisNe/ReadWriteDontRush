@@ -51,7 +51,8 @@ namespace ReadWriteDontRush.Pages
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                query = query.Where(b => b.Title?.ToLower().Contains(searchText) ?? false);
+                // Исправлено: убираем оператор ?. и используем обычное сравнение
+                query = query.Where(b => b.Title != null && b.Title.ToLower().Contains(searchText));
             }
 
             var booksWithDetails = query.Select(b => new AuthorBookViewModel
@@ -60,8 +61,8 @@ namespace ReadWriteDontRush.Pages
                 Title = b.Title ?? "Без названия",
                 CoverImagePath = b.CoverImagePath,
                 AverageRating = b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) : 0,
-                GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genre.GenreName)),
-                IsFrozen = b.IsFrozen,
+                GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genres.GenreName)),
+                IsFrozen = b.IsFrozen ?? false,
                 ShowAppealButton = showAppealButtons ? Visibility.Visible : Visibility.Collapsed
             }).ToList();
 

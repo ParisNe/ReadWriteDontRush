@@ -37,7 +37,7 @@ namespace ReadWriteDontRush.Pages
                     c.CreatedAt,
                     BookTitle = c.Books != null ? c.Books.Title : "Неизвестная книга",
                     UserLogin = c.Users.Login,
-                    TargetUser = c.TargetUserNavigation != null ? c.TargetUserNavigation.Login : null
+                    TargetUser = c.Users != null ? c.Users.Login : null
                 })
                 .OrderByDescending(c => c.CreatedAt)
                 .ToList();

@@ -30,7 +30,7 @@ namespace ReadWriteDontRush.Pages
             public string Login { get; set; }
             public string DisplayName { get; set; }
             public string Email { get; set; }
-            public DateTime CreatedAt { get; set; }
+            public DateTime CreatedAt { get; set; } 
             public bool IsFrozen { get; set; }
             public string RoleName { get; set; }
             public string Status { get; set; }
@@ -64,12 +64,12 @@ namespace ReadWriteDontRush.Pages
                 Login = u.Login,
                 DisplayName = u.DisplayName,
                 Email = u.Email,
-                CreatedAt = u.CreatedAt,
+                CreatedAt = u.CreatedAt ?? DateTime.Now,  
                 IsFrozen = u.IsFrozen ?? false,
                 RoleName = u.RoleID == 1 ? "Администратор" : (u.RoleID == 2 ? "Пользователь" : "Автор"),
                 Status = (u.IsFrozen ?? false) ? "Заморожен" : "Активен",
                 StatusColor = (u.IsFrozen ?? false) ? Brushes.Red : Brushes.Green,
-                RoleID = u.RoleID ?? 2
+                RoleID = u.RoleID   
             }).OrderBy(u => u.DisplayName).ToList();
 
             UsersItemsControl.ItemsSource = userViewModels;

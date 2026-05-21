@@ -87,11 +87,11 @@ namespace ReadWriteDontRush.Pages
                     Content = b.Content ?? "",
                     AuthorName = b.Users?.DisplayName ?? "Неизвестный автор",
                     AuthorID = b.AuthorID,
-                    IsFrozen = b.IsFrozen,
-                    CreatedAt = b.CreatedAt,
+                    IsFrozen = b.IsFrozen ?? false,  
+                    CreatedAt = b.CreatedAt ?? DateTime.Now, 
                     AverageRating = b.Reviews.Any() ? b.Reviews.Average(r => r.Rating) : 0,
                     ReviewsCount = b.Reviews.Count,
-                    GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genre.GenreName))
+                    GenresString = string.Join(", ", b.BookGenres.Select(bg => bg.Genres.GenreName)) 
                 }).ToList();
 
                 if (CmbSort.SelectedItem != null)
