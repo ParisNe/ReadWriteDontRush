@@ -11,64 +11,121 @@
     <Page.Resources>
         <Style x:Key="BookCardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Margin" Value="12"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect BlurRadius="5" ShadowDepth="2" Opacity="0.2"/>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.15"/>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="32"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Style.Resources>
+        </Style>
     </Page.Resources>
 
-    <Grid Background="#F5F5F5">
+    <Grid Background="#E8ECEF">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="#2C3E50" Padding="15">
-            <TextBlock Text="Мои списки книг" FontSize="24" FontWeight="Bold" 
+        <!-- Заголовок с градиентом -->
+        <Border Grid.Row="0" Background="#1E2A38" Padding="20" CornerRadius="0">
+            <TextBlock Text="📚 Мои списки книг" FontSize="28" FontWeight="Bold" 
                        Foreground="White" HorizontalAlignment="Center"/>
         </Border>
 
-        <Border Grid.Row="1" Background="White" Padding="15" Margin="0,0,0,10">
+        <!-- Панель фильтров с тенью -->
+        <Border Grid.Row="1" Background="White" Padding="20" Margin="0,0,0,15" 
+                CornerRadius="0">
+            <Border.Resources>
+                <DropShadowEffect x:Key="HeaderShadow" BlurRadius="8" ShadowDepth="2" Opacity="0.1"/>
+            </Border.Resources>
             <StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
-                    <Button x:Name="BtnPlanned" Content="📚 В планах" Width="120" Height="40" 
-                            Background="#3498DB" Foreground="White" Margin="5"
-                            Click="BtnPlanned_Click"/>
-                    <Button x:Name="BtnReading" Content="📖 Читаю" Width="120" Height="40" 
-                            Background="#F39C12" Foreground="White" Margin="5"
-                            Click="BtnReading_Click"/>
-                    <Button x:Name="BtnRead" Content="✅ Прочитано" Width="120" Height="40" 
-                            Background="#27AE60" Foreground="White" Margin="5"
-                            Click="BtnRead_Click"/>
-                    <Button x:Name="BtnAbandoned" Content="❌ Заброшено" Width="120" Height="40" 
-                            Background="#E74C3C" Foreground="White" Margin="5"
-                            Click="BtnAbandoned_Click"/>
+                <!-- Кнопки категорий -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                    <Button x:Name="BtnPlanned" Content="📚 В планах" Width="130" Height="42" 
+                            Background="#3498DB" Foreground="White" Margin="8" FontWeight="SemiBold" FontSize="13"
+                            Cursor="Hand" BorderThickness="0" Click="BtnPlanned_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="BtnReading" Content="📖 Читаю" Width="130" Height="42" 
+                            Background="#F39C12" Foreground="White" Margin="8" FontWeight="SemiBold" FontSize="13"
+                            Cursor="Hand" BorderThickness="0" Click="BtnReading_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="BtnRead" Content="✅ Прочитано" Width="130" Height="42" 
+                            Background="#27AE60" Foreground="White" Margin="8" FontWeight="SemiBold" FontSize="13"
+                            Cursor="Hand" BorderThickness="0" Click="BtnRead_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="BtnAbandoned" Content="❌ Заброшено" Width="130" Height="42" 
+                            Background="#E74C3C" Foreground="White" Margin="8" FontWeight="SemiBold" FontSize="13"
+                            Cursor="Hand" BorderThickness="0" Click="BtnAbandoned_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
 
+                <!-- Поиск и фильтры -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="220"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                        <TextBlock Text="Поиск" FontSize="12" Foreground="Gray"/>
-                        <TextBox x:Name="TxtSearch" Margin="0,5,0,0" Height="35" 
-                                 TextChanged="TxtSearch_TextChanged"/>
+                    <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                        <TextBlock Text="🔍 Поиск" FontSize="12" Foreground="#555" Margin="0,0,0,3"/>
+                        <TextBox x:Name="TxtSearch" Margin="0,0,0,0" Height="38" 
+                                 FontSize="13" Padding="8" BorderBrush="#BDC3C7" BorderThickness="1"
+                                 TextChanged="TxtSearch_TextChanged">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1" Margin="0,0,10,0">
-                        <TextBlock Text="Сортировка" FontSize="12" Foreground="Gray"/>
-                        <ComboBox x:Name="CmbSort" Height="35" SelectedIndex="0"
+                    <StackPanel Grid.Column="1" Margin="0,0,15,0">
+                        <TextBlock Text="📊 Сортировка" FontSize="12" Foreground="#555" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CmbSort" Height="38" FontSize="13" BorderBrush="#BDC3C7" BorderThickness="1"
                                   SelectionChanged="CmbSort_SelectionChanged">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </ComboBox.Resources>
                             <ComboBoxItem Content="По названию (А-Я)"/>
                             <ComboBoxItem Content="По названию (Я-А)"/>
                             <ComboBoxItem Content="По рейтингу (высокий)"/>
@@ -79,21 +136,34 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="2">
-                        <TextBlock Text="Фильтр по жанру" FontSize="12" Foreground="Gray"/>
-                        <ComboBox x:Name="CmbGenre" Height="35" 
-                                  SelectionChanged="CmbGenre_SelectionChanged"/>
+                        <TextBlock Text="🏷️ Фильтр по жанру" FontSize="12" Foreground="#555" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CmbGenre" Height="38" FontSize="13" BorderBrush="#BDC3C7" BorderThickness="1"
+                                  SelectionChanged="CmbGenre_SelectionChanged">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
                     </StackPanel>
 
-                    <Button x:Name="BtnReset" Grid.Column="3" Content="Сбросить" 
-                            Width="80" Height="35" Margin="10,22,0,0"
-                            Background="#95A5A6" Foreground="White"
-                            Click="BtnReset_Click"/>
+                    <Button x:Name="BtnReset" Grid.Column="3" Content="↺ Сбросить" 
+                            Width="90" Height="38" Margin="15,22,0,0"
+                            Background="#95A5A6" Foreground="White" FontWeight="SemiBold"
+                            BorderThickness="0" Cursor="Hand" Click="BtnReset_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Border>
 
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="BooksItemsControl" Margin="10">
+        <!-- Список книг -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="BooksItemsControl" Margin="15">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -102,51 +172,73 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Width="200" Style="{StaticResource BookCardStyle}">
+                        <Border Width="220" Style="{StaticResource BookCardStyle}">
                             <StackPanel>
-                                <Border Height="250" Background="#ECF0F1" CornerRadius="8,8,0,0">
-                                    <Image Width="180" Height="230" Margin="10,10,10,10"
+                                <!-- Обложка -->
+                                <Border Height="280" Background="#F0F2F5" CornerRadius="12,12,0,0">
+                                    <Image Width="200" Height="260" Margin="10,10,10,10"
                                            Stretch="UniformToFill">
                                         <Image.Source>
                                             <Binding Path="CoverImagePath">
-
                                             </Binding>
                                         </Image.Source>
                                     </Image>
                                 </Border>
 
-                                <StackPanel Margin="10" Height="140">
+                                <!-- Информация о книге -->
+                                <StackPanel Margin="12" Height="150">
                                     <TextBlock Text="{Binding Title}" FontWeight="Bold" 
-                                               FontSize="14" TextWrapping="Wrap"
-                                               Margin="0,0,0,5"/>
+                                               FontSize="15" TextWrapping="Wrap"
+                                               Margin="0,0,0,6" Foreground="#1E2A38"/>
                                     <TextBlock Text="{Binding AuthorName}" 
-                                               FontSize="11" Foreground="Gray"
-                                               Margin="0,0,0,5"/>
+                                               FontSize="12" Foreground="#7F8C8D"
+                                               Margin="0,0,0,6"/>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                        <TextBlock Text="★" Foreground="Gold" FontSize="14"/>
+                                    <!-- Рейтинг -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <TextBlock Text="★" Foreground="#F1C40F" FontSize="16"/>
                                         <TextBlock Text="{Binding AverageRating, StringFormat={}{0:F1}}" 
-                                                   FontSize="12" Margin="5,0,0,0"/>
-                                        <TextBlock Text="{Binding ReviewsCount, StringFormat='(отзывов: {0})'}" 
-                                                   FontSize="10" Foreground="Gray" Margin="5,0,0,0"/>
+                                                   FontSize="13" Margin="5,0,0,0" Foreground="#555"/>
+                                        <TextBlock Text="{Binding ReviewsCount, StringFormat='({0})'}" 
+                                                   FontSize="11" Foreground="#95A5A6" Margin="5,0,0,0"/>
                                     </StackPanel>
 
-                                    <TextBlock Text="{Binding GenresString}" FontSize="10" 
+                                    <!-- Жанры -->
+                                    <TextBlock Text="{Binding GenresString}" FontSize="11" 
                                                Foreground="#7F8C8D" TextWrapping="Wrap"
-                                               MaxHeight="40"/>
+                                               MaxHeight="36"/>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <Button Content="Читать" Width="60" Height="30"
-                                                Background="#3498DB" Foreground="White"
-                                                Click="OnReadBookClick" Tag="{Binding}"/>
-                                        <Button Content="Переместить" Width="80" Height="30"
-                                                Margin="5,0,0,0" Background="#2C3E50" 
-                                                Foreground="White" Click="BtnMove_Click" 
-                                                Tag="{Binding}"/>
-                                        <Button Content="✕" Width="30" Height="30"
-                                                Margin="5,0,0,0" Background="#E74C3C" 
-                                                Foreground="White" Click="BtnRemove_Click" 
-                                                Tag="{Binding}"/>
+                                    <!-- Кнопки действий -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                        <Button Content="📖 Читать" Width="70" Height="34"
+                                                Background="#3498DB" Foreground="White" FontSize="11"
+                                                Cursor="Hand" BorderThickness="0" Click="OnReadBookClick" Tag="{Binding}">
+                                            <Button.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="6"/>
+                                                </Style>
+                                            </Button.Resources>
+                                        </Button>
+                                        <Button Content="↺ Переместить" Width="85" Height="34"
+                                                Margin="6,0,0,0" Background="#2C3E50" FontSize="11"
+                                                Foreground="White" Cursor="Hand" BorderThickness="0" 
+                                                Click="BtnMove_Click" Tag="{Binding}">
+                                            <Button.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="6"/>
+                                                </Style>
+                                            </Button.Resources>
+                                        </Button>
+                                        <Button Content="✕" Width="34" Height="34"
+                                                Margin="6,0,0,0" Background="#E74C3C" FontSize="14"
+                                                Foreground="White" Cursor="Hand" BorderThickness="0" 
+                                                Click="BtnRemove_Click" Tag="{Binding}">
+                                            <Button.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="6"/>
+                                                </Style>
+                                            </Button.Resources>
+                                        </Button>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
@@ -156,9 +248,10 @@
             </ItemsControl>
         </ScrollViewer>
 
+        <!-- Пустое сообщение -->
         <TextBlock x:Name="TxtEmptyMessage" Grid.Row="2" 
-                   Text="В этом списке пока нет книг" 
-                   FontSize="16" Foreground="Gray"
+                   Text="📭 В этом списке пока нет книг" 
+                   FontSize="18" Foreground="#95A5A6" FontWeight="SemiBold"
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    Visibility="Collapsed"/>
     </Grid>

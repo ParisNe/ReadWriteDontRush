@@ -9,54 +9,72 @@
       Title="RegisterPage">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="450">
-            <Border Background="White" CornerRadius="10" Padding="30" 
-                    BorderBrush="#DDD" BorderThickness="1" Margin="20">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="500">
+            <Border Background="White" CornerRadius="15" Padding="35" 
+                    BorderBrush="#2C3E50" BorderThickness="2" Margin="20"
+                    >
+                <Border.Resources>
+                    <DropShadowEffect x:Key="ShadowEffect" BlurRadius="15" ShadowDepth="3" Opacity="0.15"/>
+                </Border.Resources>
                 <StackPanel>
                     <TextBlock Text="📝 Регистрация" 
-                               FontSize="24" 
+                               FontSize="26" 
                                FontWeight="Bold" 
                                HorizontalAlignment="Center" 
-                               Margin="0,0,0,20"
-                               Foreground="#2C3E50"/>
+                               Margin="0,0,0,25"
+                               Foreground="#1E2A38"/>
 
-                    <TextBlock Text="Логин" Margin="0,5,0,0"/>
-                    <TextBox Name="txtLogin" />
+                    <TextBlock Text="Логин" Margin="0,5,0,5" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                    <TextBox Name="txtLogin" Height="38" FontSize="13" Padding="8" BorderBrush="#BDC3C7" BorderThickness="1"/>
 
-                    <TextBlock Text="Email" Margin="0,15,0,0"/>
-                    <TextBox Name="txtEmail"/>
+                    <TextBlock Text="Email" Margin="0,15,0,5" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                    <TextBox Name="txtEmail" Height="38" FontSize="13" Padding="8" BorderBrush="#BDC3C7" BorderThickness="1"/>
 
-                    <TextBlock Text="Отображаемое имя" Margin="0,15,0,0"/>
-                    <TextBox Name="txtDisplayName" />
+                    <TextBlock Text="Отображаемое имя" Margin="0,15,0,5" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                    <TextBox Name="txtDisplayName" Height="38" FontSize="13" Padding="8" BorderBrush="#BDC3C7" BorderThickness="1"/>
 
-                    <TextBlock Text="Пароль" Margin="0,15,0,0"/>
-                    <PasswordBox Name="txtPassword" />
+                    <TextBlock Text="Пароль" Margin="0,15,0,5" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                    <PasswordBox Name="txtPassword" Height="38" FontSize="13" Padding="8" BorderBrush="#BDC3C7" BorderThickness="1"/>
 
-                    <TextBlock Text="Подтверждение пароля" Margin="0,15,0,0"/>
-                    <PasswordBox Name="txtConfirmPassword" />
+                    <TextBlock Text="Подтверждение пароля" Margin="0,15,0,5" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+                    <PasswordBox Name="txtConfirmPassword" Height="38" FontSize="13" Padding="8" BorderBrush="#BDC3C7" BorderThickness="1"/>
 
                     <Button Name="btnRegister" 
                             Content="Зарегистрироваться" 
-                           
-                            Height="40" 
-                            Margin="0,20,0,10"
-                            Click="btnRegister_Click"/>
+                            Background="#27AE60"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Height="45" 
+                            Margin="0,25,0,10"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="btnRegister_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
 
                     <Button Name="btnBack" 
                             Content="← Назад к входу" 
                             Background="Transparent" 
-                            Foreground="#666" 
+                            Foreground="#3498DB" 
+                            FontSize="13"
                             BorderThickness="0"
                             Cursor="Hand"
-                            Margin="0,5"
+                            Margin="0,8"
                             Click="btnBack_Click"/>
 
                     <TextBlock Name="txtError" 
-                               Foreground="Red" 
+                               Foreground="#E74C3C" 
                                HorizontalAlignment="Center" 
-                               Margin="0,10"
+                               Margin="0,15"
                                Visibility="Collapsed"
-                               TextWrapping="Wrap"/>
+                               TextWrapping="Wrap"
+                               FontSize="12"
+                               FontWeight="SemiBold"/>
                 </StackPanel>
             </Border>
         </Grid>

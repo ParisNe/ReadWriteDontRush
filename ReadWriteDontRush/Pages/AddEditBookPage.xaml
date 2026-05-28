@@ -8,56 +8,147 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddEditBookPage" Background="White">
 
+    <Page.Resources>
+        <Style x:Key="FormLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#2C3E50"/>
+        </Style>
+
+        <Style x:Key="FormTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderBrush" Value="#BDC3C7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Margin" Value="8"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Page.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Background="#F5F5F5" Margin="20">
-            <Border Background="White" CornerRadius="10" Padding="30">
+        <Grid Background="#E8ECEF" Margin="25">
+            <Border Background="White" CornerRadius="16" Padding="35" 
+             >
+                <Border.Resources>
+                    <DropShadowEffect x:Key="CardShadow" BlurRadius="15" ShadowDepth="3" Opacity="0.12"/>
+                </Border.Resources>
                 <StackPanel>
-                    <TextBlock x:Name="TxtTitle" Text="Добавление новой книги" 
-                               FontSize="24" FontWeight="Bold" 
-                               HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <!-- Заголовок с иконкой -->
+                    <TextBlock x:Name="TxtTitle" Text="📚 Добавление новой книги" 
+                               FontSize="28" FontWeight="Bold" 
+                               HorizontalAlignment="Center" Margin="0,0,0,25" Foreground="#1E2A38"/>
 
-                    <TextBlock Text="Название книги" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <TextBox x:Name="TxtBookTitle" Height="35" Margin="0,0,0,15" Padding="5"/>
+                    <!-- Название книги -->
+                    <TextBlock Text="📖 Название книги" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox x:Name="TxtBookTitle" Style="{StaticResource FormTextBoxStyle}"/>
 
-                    <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <TextBox x:Name="TxtDescription" Height="100" TextWrapping="Wrap"
-                             AcceptsReturn="True" Margin="0,0,0,15" Padding="5"/>
+                    <!-- Описание -->
+                    <TextBlock Text="📝 Описание" Style="{StaticResource FormLabelStyle}"/>
+                    <TextBox x:Name="TxtDescription" Height="110" TextWrapping="Wrap"
+                             AcceptsReturn="True" Margin="0,0,0,16" Padding="10" 
+                             FontSize="13" BorderBrush="#BDC3C7" BorderThickness="1"
+                             VerticalScrollBarVisibility="Auto">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
 
-                    <TextBlock Text="Жанры" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <ListBox x:Name="ListGenres" Height="120" 
-                             SelectionMode="Multiple" Margin="0,0,0,15">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding GenreName}" 
-                                          Tag="{Binding GenreID}"
-                                          Checked="GenreCheckBox_Checked"
-                                          Unchecked="GenreCheckBox_Unchecked"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <!-- Жанры -->
+                    <TextBlock Text="🏷️ Жанры" Style="{StaticResource FormLabelStyle}"/>
+                    <Border BorderBrush="#BDC3C7" BorderThickness="1" CornerRadius="8" Margin="0,0,0,16">
+                        <ListBox x:Name="ListGenres" Height="140" BorderThickness="0" Padding="8"
+                                 SelectionMode="Multiple" Background="#FAFAFA">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding GenreName}" 
+                                              Tag="{Binding GenreID}"
+                                              FontSize="13" Margin="0,4"
+                                              Checked="GenreCheckBox_Checked"
+                                              Unchecked="GenreCheckBox_Unchecked">
+                                        <CheckBox.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Margin" Value="4,0,0,0"/>
+                                            </Style>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
 
-                    <TextBlock Text="Путь к обложке (опционально)" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <Grid Margin="0,0,0,15">
+                    <!-- Путь к обложке -->
+                    <TextBlock Text="🖼️ Путь к обложке (опционально)" Style="{StaticResource FormLabelStyle}"/>
+                    <Grid Margin="0,0,0,16">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="TxtCoverPath" Grid.Column="0" Height="35" Padding="5"/>
-                        <Button x:Name="BtnBrowseCover" Grid.Column="1" Content="Обзор" 
-                                Width="80" Margin="10,0,0,0" Click="BtnBrowseCover_Click"/>
+                        <TextBox x:Name="TxtCoverPath" Grid.Column="0" Height="38" Padding="10" 
+                                 FontSize="13" BorderBrush="#BDC3C7" BorderThickness="1">
+                            <TextBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <Button x:Name="BtnBrowseCover" Grid.Column="1" Content="📁 Обзор" 
+                                Width="90" Height="38" Margin="12,0,0,0" 
+                                Background="#3498DB" Foreground="White" FontWeight="SemiBold"
+                                Cursor="Hand" BorderThickness="0" Click="BtnBrowseCover_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
                     </Grid>
 
-                    <TextBlock Text="Текст книги" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <TextBox x:Name="TxtContent" Height="300" TextWrapping="Wrap"
-                             AcceptsReturn="True" Margin="0,0,0,20" 
-                             VerticalScrollBarVisibility="Auto" Padding="5"/>
+                    <!-- Текст книги -->
+                    <TextBlock Text="📄 Текст книги" />
+                    <TextBox x:Name="TxtContent" Height="350" TextWrapping="Wrap"
+                             AcceptsReturn="True" Margin="0,0,0,25" 
+                             VerticalScrollBarVisibility="Auto" Padding="12" 
+                             FontSize="13"
+                             BorderBrush="#BDC3C7" BorderThickness="1">
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
 
+                    <!-- Кнопки действий -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="BtnSave" Content="Сохранить" Width="120" Height="40"
-                                Background="#27AE60" Foreground="White" Margin="5"
+                        <Button x:Name="BtnSave" Content="💾 Сохранить" 
+                                Style="{StaticResource ActionButtonStyle}"
+                                Background="#27AE60" Foreground="White"
                                 Click="BtnSave_Click"/>
-                        <Button x:Name="BtnCancel" Content="Отмена" Width="120" Height="40"
-                                Background="#95A5A6" Foreground="White" Margin="5"
+                        <Button x:Name="BtnCancel" Content="❌ Отмена" 
+                                Style="{StaticResource ActionButtonStyle}"
+                                Background="#95A5A6" Foreground="White"
                                 Click="BtnCancel_Click"/>
                     </StackPanel>
                 </StackPanel>

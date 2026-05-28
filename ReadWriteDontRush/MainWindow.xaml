@@ -9,15 +9,15 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="90"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <Border Grid.Column="0" Background="#2C3E50" x:Name="SideBarMenu">
-            <StackPanel Margin="0,20,0,0">
+        <Border Grid.Column="0" Background="#1E2A38" x:Name="SideBarMenu" CornerRadius="0">
+            <StackPanel Margin="0,30,0,0">
                 <!-- Каталог книг -->
-                <Button x:Name="BtnCatalog" Click="BtnCatalog_Click">
+                <Button x:Name="BtnCatalog" Click="BtnCatalog_Click" Width="70" Height="70" Margin="0,8,0,8" Background="#2C3E50" BorderThickness="0" Cursor="Hand">
                     <Button.ToolTip>Каталог книг</Button.ToolTip>
                     <StackPanel>
                         <Image Source="Images/Books.png" Width="32" Height="32"/>
@@ -25,7 +25,7 @@
                 </Button>
 
                 <!-- Списки книг -->
-                <Button x:Name="BtnBookLists" Click="BtnBookLists_Click">
+                <Button x:Name="BtnBookLists" Click="BtnBookLists_Click" Width="70" Height="70" Margin="0,8,0,8" Background="#2C3E50" BorderThickness="0" Cursor="Hand">
                     <Button.ToolTip>Списки книг</Button.ToolTip>
                     <StackPanel>
                         <Image Source="Images/list.png" Width="32" Height="32"/>
@@ -33,7 +33,7 @@
                 </Button>
 
                 <!-- Администрирование (видно только админу) -->
-                <Button x:Name="BtnAdmin" Click="BtnAdmin_Click"  Visibility="Collapsed">
+                <Button x:Name="BtnAdmin" Click="BtnAdmin_Click" Width="70" Height="70" Margin="0,8,0,8" Background="#2C3E50" BorderThickness="0" Cursor="Hand" Visibility="Collapsed">
                     <Button.ToolTip>Администрирование</Button.ToolTip>
                     <StackPanel>
                         <Image Source="Images/admin.png" Width="32" Height="32"/>
@@ -41,7 +41,7 @@
                 </Button>
 
                 <!-- Страница автора (видно только авторам) -->
-                <Button x:Name="BtnAuthor" Click="BtnAuthor_Click" Visibility="Collapsed">
+                <Button x:Name="BtnAuthor" Click="BtnAuthor_Click" Width="70" Height="70" Margin="0,8,0,8" Background="#2C3E50" BorderThickness="0" Cursor="Hand" Visibility="Collapsed">
                     <Button.ToolTip>Страница автора</Button.ToolTip>
                     <StackPanel>
                         <Image Source="Images/author.png" Width="32" Height="32"/>
@@ -49,15 +49,15 @@
                 </Button>
 
                 <!-- Предупреждение о заморозке -->
-                <Button x:Name="BtnWarning" Click="BtnWarning_Click"  Visibility="Collapsed">
+                <Button x:Name="BtnWarning" Click="BtnWarning_Click" Width="70" Height="70" Margin="0,8,0,8" Background="#C0392B" BorderThickness="0" Cursor="Hand" Visibility="Collapsed">
                     <Button.ToolTip>Аккаунт заморожен</Button.ToolTip>
                     <StackPanel>
-                        <Image Source="Images/warning.png" Width="32" Height="32"/>
+                        <Image Source="/Images/frozen.png" Width="32" Height="32"/>
                     </StackPanel>
                 </Button>
 
                 <!-- Профиль -->
-                <Button x:Name="BtnProfile" Click="BtnProfile_Click" >
+                <Button x:Name="BtnProfile" Click="BtnProfile_Click" Width="70" Height="70" Margin="0,8,0,8" Background="#2C3E50" BorderThickness="0" Cursor="Hand">
                     <Button.ToolTip>Профиль</Button.ToolTip>
                     <StackPanel>
                         <Image Source="/Images/profile.png" Width="32" Height="32"/>
@@ -67,6 +67,6 @@
         </Border>
 
         <!-- Main Content Frame -->
-        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated"/>
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" Background="#F8F9FA"/>
     </Grid>
 </Window>

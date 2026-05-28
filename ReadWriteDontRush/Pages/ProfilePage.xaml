@@ -9,18 +9,27 @@
       Title="ProfilePage">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Background="#F5F5F5" Margin="20">
+        <Grid Background="#E8ECEF" Margin="25">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Информация о пользователе -->
-            <Border Grid.Row="0" Background="White" CornerRadius="10" 
-                    Padding="20" Margin="0,0,0,20">
+            <!-- Информация о пользователе с тенью -->
+            <Border Grid.Row="0" Background="White" CornerRadius="12" 
+                    Padding="25" Margin="0,0,0,25" >
+                <Border.Resources>
+                    <DropShadowEffect x:Key="CardShadow" BlurRadius="12" ShadowDepth="2" Opacity="0.12"/>
+                </Border.Resources>
                 <StackPanel>
-                    <TextBlock Text="Профиль пользователя" FontSize="24" FontWeight="Bold" 
-                               HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <!-- Аватар и имя -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,25">
+                        <Border Background="#1E2A38" Width="60" Height="60" CornerRadius="30" Margin="0,0,15,0">
+                            <TextBlock Text="👤" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Профиль пользователя" FontSize="28" FontWeight="Bold" 
+                                   Foreground="#1E2A38" VerticalAlignment="Center"/>
+                    </StackPanel>
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -33,92 +42,120 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Логин:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
+                        <!-- Строки с данными -->
+                        <Border Grid.Row="0" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,12" Padding="8">
+                            <TextBlock Text="👤 Логин:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
                         <TextBlock x:Name="TxtLogin" Grid.Row="0" Grid.Column="1" 
-                                   Margin="0,0,0,10" FontSize="14"/>
+                                   Margin="0,0,0,12" FontSize="14" VerticalAlignment="Center" Foreground="#555"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Отображаемое имя:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
+                        <Border Grid.Row="1" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,12" Padding="8">
+                            <TextBlock Text="📝 Отображаемое имя:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
                         <TextBlock x:Name="TxtDisplayName" Grid.Row="1" Grid.Column="1" 
-                                   Margin="0,0,0,10" FontSize="14"/>
+                                   Margin="0,0,0,12" FontSize="14" VerticalAlignment="Center" Foreground="#555"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
+                        <Border Grid.Row="2" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,12" Padding="8">
+                            <TextBlock Text="📧 Email:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
                         <TextBlock x:Name="TxtEmail" Grid.Row="2" Grid.Column="1" 
-                                   Margin="0,0,0,10" FontSize="14"/>
+                                   Margin="0,0,0,12" FontSize="14" VerticalAlignment="Center" Foreground="#555"/>
 
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Роль:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
+                        <Border Grid.Row="3" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,12" Padding="8">
+                            <TextBlock Text="⭐ Роль:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
                         <TextBlock x:Name="TxtRole" Grid.Row="3" Grid.Column="1" 
-                                   Margin="0,0,0,10" FontSize="14"/>
+                                   Margin="0,0,0,12" FontSize="14" VerticalAlignment="Center" Foreground="#555"/>
 
-                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата регистрации:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
+                        <Border Grid.Row="4" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,12" Padding="8">
+                            <TextBlock Text="📅 Дата регистрации:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
                         <TextBlock x:Name="TxtCreatedAt" Grid.Row="4" Grid.Column="1" 
-                                   Margin="0,0,0,10" FontSize="14"/>
+                                   Margin="0,0,0,12" FontSize="14" VerticalAlignment="Center" Foreground="#555"/>
 
-                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Статус:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
-                        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock x:Name="TxtStatus" FontSize="14" Margin="0,0,10,0"/>
+                        <Border Grid.Row="5" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,12" Padding="8">
+                            <TextBlock Text="🔔 Статус:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
+                        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock x:Name="TxtStatus" FontSize="14" Margin="0,0,10,0" Foreground="#555"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Заявка на роль:" FontWeight="Bold" 
-                                   Margin="0,0,10,10" FontSize="14"/>
-                        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
-                            <ComboBox x:Name="CmbRequestRole" Width="150" Height="30" Margin="0,0,10,0">
+                        <Border Grid.Row="6" Grid.Column="0" Background="#F8F9FA" CornerRadius="6" Margin="0,0,10,0" Padding="8">
+                            <TextBlock Text="📨 Заявка на роль:" FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Foreground="#2C3E50"/>
+                        </Border>
+                        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                            <ComboBox x:Name="CmbRequestRole" Width="160" Height="36" Margin="0,0,12,0" 
+                                      FontSize="13" BorderBrush="#BDC3C7" BorderThickness="1">
+                                <ComboBox.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="6"/>
+                                    </Style>
+                                </ComboBox.Resources>
                                 <ComboBoxItem Content="Автор" Tag="2"/>
                                 <ComboBoxItem Content="Администратор" Tag="3"/>
                             </ComboBox>
-                            <Button x:Name="BtnRequestRole" Content="Подать заявку на смену роли" 
-                                    Width="220" Height="30" Background="#3498DB" Foreground="White"
-                                    Click="BtnRequestRole_Click"/>
+                            <Button x:Name="BtnRequestRole" Content="📤 Подать заявку на смену роли" 
+                                    Width="240" Height="36" Background="#3498DB" Foreground="White"
+                                    FontWeight="SemiBold" FontSize="12" Cursor="Hand" BorderThickness="0"
+                                    Click="BtnRequestRole_Click">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="6"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </StackPanel>
                     </Grid>
 
                     <!-- Предупреждение о заморозке -->
-                    <Border x:Name="BorderFreezeWarning" Background="#FFE6E6" 
-                            CornerRadius="5" Padding="15" Margin="0,20,0,0"
+                    <Border x:Name="BorderFreezeWarning" Background="#FDEDEC" 
+                            CornerRadius="8" Padding="18" Margin="0,25,0,0" BorderBrush="#E74C3C" BorderThickness="1"
                             Visibility="Collapsed">
                         <StackPanel>
                             <TextBlock Text="⚠️ ВНИМАНИЕ: АККАУНТ ЗАМОРОЖЕН" 
-                                       FontWeight="Bold" Foreground="#E74C3C" 
-                                       Margin="0,0,0,10" FontSize="14"/>
+                                       FontWeight="Bold" Foreground="#C0392B" 
+                                       Margin="0,0,0,12" FontSize="15"/>
                             <TextBlock x:Name="TxtFreezeReason" TextWrapping="Wrap" 
-                                       Margin="0,0,0,10" FontSize="13"/>
-                            <Button x:Name="BtnAppealFreeze" Content="Оспорить заморозку" 
-                                    Width="150" Height="30" Background="#E67E22" 
-                                    Foreground="White" Click="BtnAppealFreeze_Click"/>
+                                       Margin="0,0,0,12" FontSize="13" Foreground="#555"/>
+                            <Button x:Name="BtnAppealFreeze" Content="📢 Оспорить заморозку" 
+                                    Width="160" Height="36" Background="#E67E22" 
+                                    Foreground="White" FontWeight="SemiBold" Cursor="Hand" BorderThickness="0"
+                                    Click="BtnAppealFreeze_Click">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="6"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
                         </StackPanel>
                     </Border>
 
                     <!-- Информация о статусе заявки -->
                     <Border x:Name="BorderRequestStatus" Background="#E8F8F5" 
-                            CornerRadius="5" Padding="15" Margin="0,20,0,0"
+                            CornerRadius="8" Padding="18" Margin="0,25,0,0" BorderBrush="#27AE60" BorderThickness="1"
                             Visibility="Collapsed">
                         <StackPanel>
-                            <TextBlock x:Name="TxtRequestStatus" TextWrapping="Wrap" FontSize="13"/>
+                            <TextBlock x:Name="TxtRequestStatus" TextWrapping="Wrap" FontSize="13" Foreground="#555"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
             </Border>
 
-            <!-- Отзывы пользователя -->
-            <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="20">
+            <!-- Отзывы пользователя с тенью -->
+            <Border Grid.Row="1" Background="White" CornerRadius="12" Padding="25" >
                 <StackPanel>
-                    <TextBlock Text="Мои отзывы" FontSize="20" FontWeight="Bold" 
-                               Margin="0,0,0,15"/>
+                    <TextBlock Text="📝 Мои отзывы" FontSize="24" FontWeight="Bold" 
+                               Margin="0,0,0,20" Foreground="#1E2A38"/>
 
                     <ItemsControl x:Name="ReviewsItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="#F8F9FA" CornerRadius="5" 
-                                        Padding="15" Margin="0,0,0,10">
+                                <Border Background="#F8F9FA" CornerRadius="10" 
+                                        Padding="18" Margin="0,0,0,12" BorderBrush="#E8ECEF" BorderThickness="1">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -126,35 +163,41 @@
                                         </Grid.ColumnDefinitions>
 
                                         <StackPanel Grid.Column="0">
-                                            <TextBlock FontWeight="Bold" FontSize="14">
-                                                <Run Text="Книга: "/>
+                                            <TextBlock FontWeight="Bold" FontSize="15" Foreground="#2C3E50">
+                                                <Run Text="📖 "/>
                                                 <Run Text="{Binding Books.Title}" 
                                                      Foreground="#3498DB"/>
                                             </TextBlock>
-                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                                                <TextBlock Text="★" Foreground="Gold" FontSize="14"/>
-                                                <TextBlock Text="{Binding Rating}" FontSize="12" Margin="5,0,0,0"/>
-                                                <TextBlock Text="{Binding CreatedAt, StringFormat=' | {0:dd.MM.yyyy}'}" 
-                                                           FontSize="11" Foreground="Gray" Margin="10,0,0,0"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,8,0,8">
+                                                <TextBlock Text="★" Foreground="#F1C40F" FontSize="15"/>
+                                                <TextBlock Text="{Binding Rating}" FontSize="13" Margin="5,0,0,0" Foreground="#555"/>
+                                                <TextBlock Text="{Binding CreatedAt, StringFormat=' | 📅 {0:dd.MM.yyyy}'}" 
+                                                           FontSize="11" Foreground="#95A5A6" Margin="10,0,0,0"/>
                                             </StackPanel>
                                             <TextBlock Text="{Binding ReviewText}" 
-                                                       TextWrapping="Wrap" MaxHeight="100"/>
+                                                       TextWrapping="Wrap" MaxHeight="100" FontSize="12" Foreground="#555"/>
                                         </StackPanel>
 
-                                        <Button Grid.Column="1" Content="К книге" 
-                                                Width="80" Height="30"
-                                                Background="#2C3E50" Foreground="White"
-                                                Click="BtnGoToBook_Click" 
-                                                Tag="{Binding BookID}"/>
+                                        <Button Grid.Column="1" Content="📖 К книге" 
+                                                Width="90" Height="36"
+                                                Background="#2C3E50" Foreground="White" FontWeight="SemiBold"
+                                                Cursor="Hand" BorderThickness="0" Click="BtnGoToBook_Click" 
+                                                Tag="{Binding BookID}">
+                                            <Button.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="6"/>
+                                                </Style>
+                                            </Button.Resources>
+                                        </Button>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <TextBlock x:Name="TxtNoReviews" Text="У вас пока нет отзывов" 
-                               FontSize="14" Foreground="Gray"
-                               HorizontalAlignment="Center" Margin="20"
+                    <TextBlock x:Name="TxtNoReviews" Text="📭 У вас пока нет отзывов" 
+                               FontSize="16" Foreground="#95A5A6" FontWeight="SemiBold"
+                               HorizontalAlignment="Center" Margin="30,20"
                                Visibility="Collapsed"/>
                 </StackPanel>
             </Border>

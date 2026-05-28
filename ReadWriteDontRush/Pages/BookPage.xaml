@@ -31,7 +31,6 @@
                         <Image x:Name="BookCover" Stretch="UniformToFill">
                             <Image.Source>
                                 <Binding Path="CoverImagePath">
-
                                 </Binding>
                             </Image.Source>
                         </Image>
@@ -58,25 +57,26 @@
                         <TextBlock x:Name="TxtDescription" TextWrapping="Wrap" 
                                    FontSize="14" Margin="0,0,0,15" MaxHeight="100"/>
 
-                        <StackPanel Orientation="Horizontal">
+                        <!-- Кнопки перемещены вниз и расположены вертикально -->
+                        <StackPanel Margin="0,5,0,0">
                             <Button x:Name="BtnAddToList" Content="В мой список" 
-                                    Background="#3498DB" Foreground="White" 
-                                    Height="40" Width="120" Margin="0,0,10,0"
+                                    Height="35" Width="150" Margin="0,0,0,8"
+                                    HorizontalAlignment="Left"
                                     Click="BtnAddToList_Click"/>
 
                             <Button x:Name="BtnComplainBook" Content="Жалоба на книгу" 
-                                    Background="#E74C3C" Foreground="White" 
-                                    Height="40" Width="140" Margin="0,0,10,0"
+                                    Height="35" Width="150" Margin="0,0,0,8"
+                                    HorizontalAlignment="Left"
                                     Click="BtnComplainBook_Click"/>
 
                             <Button x:Name="BtnComplainAuthor" Content="Жалоба на автора" 
-                                    Background="#E67E22" Foreground="White" 
-                                    Height="40" Width="140" Margin="0,0,10,0"
+                                    Height="35" Width="150" Margin="0,0,0,8"
+                                    HorizontalAlignment="Left"
                                     Click="BtnComplainAuthor_Click"/>
 
                             <Button x:Name="BtnFreezeBook" Content="Заморозить книгу" 
-                                    Background="#C0392B" Foreground="White" 
-                                    Height="40" Width="140" Margin="0,0,10,0"
+                                    Height="35" Width="150" Margin="0,0,0,8"
+                                    HorizontalAlignment="Left"
                                     Visibility="Collapsed" Click="BtnFreezeBook_Click"/>
                         </StackPanel>
                     </StackPanel>
@@ -127,7 +127,7 @@
                             <TextBox x:Name="TxtReview" Height="80" TextWrapping="Wrap"
                                      AcceptsReturn="True" Margin="0,0,0,10"/>
                             <Button x:Name="BtnSubmitReview" Content="Отправить отзыв" 
-                                    Width="150" Height="35" Background="#27AE60" Foreground="White"
+                                    Width="150" Height="35"
                                     Click="BtnSubmitReview_Click"/>
                         </StackPanel>
                     </Border>
@@ -162,12 +162,10 @@
 
                                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                                             <Button Content="Жалоба" Width="80" Height="30"
-                                                    Background="#E74C3C" Foreground="White"
                                                     Click="BtnComplainReview_Click" 
                                                     Tag="{Binding ReviewID}"/>
                                             <Button x:Name="BtnFreezeReview" Content="Заморозить" 
                                                     Width="90" Height="30" Margin="5,0,0,0"
-                                                    Background="#C0392B" Foreground="White"
                                                     Visibility="Collapsed"
                                                     Click="BtnFreezeReview_Click" 
                                                     Tag="{Binding ReviewID}"/>

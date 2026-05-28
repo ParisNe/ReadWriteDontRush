@@ -8,8 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage" Background="White">
 
-    <Grid Margin="20">
+    <Grid Margin="25">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -18,21 +19,65 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Читай, Пиши и не спиши" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <!-- Заголовок с иконкой -->
+        <Border Grid.Row="0" Background="#1E2A38" CornerRadius="12" Padding="20" Margin="0,0,0,25">
+            <TextBlock Text="📚 Читай, Пиши и не спиши" FontSize="26" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Foreground="White"/>
+        </Border>
 
-        <TextBlock Grid.Row="1" Text="Логин" Margin="0,5"/>
-        <TextBox Grid.Row="2" Name="txtLogin" Margin="0,5" Height="30"/>
+        <!-- Поле логина -->
+        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="6" Padding="8" Margin="0,0,0,5">
+            <TextBlock Text="👤 Логин" Margin="0,0,10,0" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+        </Border>
+        <TextBox Grid.Row="2" Name="txtLogin" Margin="0,5,0,20" Height="38" 
+                 FontSize="13" Padding="10" BorderBrush="#BDC3C7" BorderThickness="1">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
 
-        <TextBlock Grid.Row="3" Text="Пароль" Margin="0,5"/>
-        <PasswordBox Grid.Row="4" Name="txtPassword" Margin="0,5" Height="30"/>
-        <TextBlock Name="txtError" Grid.Row="5" Foreground="Red" HorizontalAlignment="Center" Margin="0,10"/>
+        <!-- Поле пароля -->
+        <Border Grid.Row="3" Background="#F8F9FA" CornerRadius="6" Padding="8" Margin="0,0,0,5">
+            <TextBlock Text="🔒 Пароль" Margin="0,0,10,0" FontSize="13" FontWeight="SemiBold" Foreground="#2C3E50"/>
+        </Border>
+        <PasswordBox Grid.Row="4" Name="txtPassword" Margin="0,5,0,15" Height="38" 
+                     FontSize="13" Padding="10" BorderBrush="#BDC3C7" BorderThickness="1">
+            <PasswordBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </PasswordBox.Resources>
+        </PasswordBox>
 
+        <!-- Сообщение об ошибке -->
+        <Border Grid.Row="5" Background="#FDEDEC" CornerRadius="6" Padding="10" Margin="0,10,0,0" 
+                BorderBrush="#E74C3C" BorderThickness="1" Visibility="Collapsed">
+            <TextBlock Name="txtError" Foreground="#C0392B" HorizontalAlignment="Center" 
+                       FontSize="12" FontWeight="SemiBold" TextWrapping="Wrap"/>
+        </Border>
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-            <Button Name="btnLogin" Content="Войти" Width="100" Height="35" Margin="5" Click="btnLogin_Click"/>
-            <Button Name="btnRegister" Content="Регистрация" Width="100" Height="35" Margin="5" Click="btnRegister_Click"/>
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
+            <Button Name="btnLogin" Content="🔓 Войти" Width="120" Height="42" Margin="8" 
+                    Background="#27AE60" Foreground="White" FontWeight="Bold" FontSize="14"
+                    Cursor="Hand" BorderThickness="0" Click="btnLogin_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="btnRegister" Content="📝 Регистрация" Width="120" Height="42" Margin="8" 
+                    Background="#3498DB" Foreground="White" FontWeight="Bold" FontSize="14"
+                    Cursor="Hand" BorderThickness="0" Click="btnRegister_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
-
-
     </Grid>
 </Page>
