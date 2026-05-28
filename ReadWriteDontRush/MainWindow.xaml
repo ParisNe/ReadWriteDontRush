@@ -20,7 +20,7 @@
                 <Button x:Name="BtnCatalog" Click="BtnCatalog_Click">
                     <Button.ToolTip>Каталог книг</Button.ToolTip>
                     <StackPanel>
-                        <Image Source="Images/book.png" Width="32" Height="32"/>
+                        <Image Source="Images/Books.png" Width="32" Height="32"/>
                     </StackPanel>
                 </Button>
 
@@ -28,7 +28,7 @@
                 <Button x:Name="BtnBookLists" Click="BtnBookLists_Click">
                     <Button.ToolTip>Списки книг</Button.ToolTip>
                     <StackPanel>
-                        <Image Source="Images/lists.png" Width="32" Height="32"/>
+                        <Image Source="Images/list.png" Width="32" Height="32"/>
                     </StackPanel>
                 </Button>
 

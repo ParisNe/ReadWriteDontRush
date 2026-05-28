@@ -115,6 +115,9 @@
     <Compile Include="ReadingLists.cs">
       <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReasonInputWindow.xaml.cs">
+      <DependentUpon>ReasonInputWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reviews.cs">
       <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReasonInputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
