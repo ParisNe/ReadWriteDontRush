@@ -8,8 +8,8 @@ namespace ReadWriteDontRush
 {
     internal class Core
     {
-        public static BookPlatformEntities Context = new BookPlatformEntities();
+        public static UPKoshelevaEntities Context = new UPKoshelevaEntities();
         public static Users CurrentUser { get; set; }
 
-    }
+    }   
 }

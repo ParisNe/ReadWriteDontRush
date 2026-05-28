@@ -9,7 +9,6 @@
       Title="CatalogPage" Background="White">
 
     <Page.Resources>
-        <!-- Стиль для карточки книги -->
         <Style x:Key="BookCardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="8"/>
@@ -29,7 +28,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Панель поиска и фильтров -->
         <Border Grid.Row="0" Background="White" Padding="15" Margin="0,0,0,10">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -67,70 +65,66 @@
                         Background="#E74C3C" Foreground="White"
                         Click="BtnReset_Click"/>
             </Grid>
-    </Border>
+        </Border>
 
-    <!-- Сетка книг -->
-    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-        <ItemsControl x:Name="BooksItemsControl" Margin="10">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="BooksItemsControl" Margin="10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Width="200" Style="{StaticResource BookCardStyle}">
-                        <StackPanel>
-                            <!-- Обложка -->
-                            <Border Height="250" Background="#ECF0F1" CornerRadius="8,8,0,0">
-                                <Image Width="180" Height="230" Margin="10,10,10,10"
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="200" Style="{StaticResource BookCardStyle}">
+                            <StackPanel>
+                                <Border Height="250" Background="#ECF0F1" CornerRadius="8,8,0,0">
+                                    <Image Width="180" Height="230" Margin="10,10,10,10"
                                            Stretch="UniformToFill">
-                                    <Image.Source>
-                                        <Binding Path="CoverImagePath"/>
-                                    </Image.Source>
-                                </Image>
-                            </Border>
+                                        <Image.Source>
+                                            <Binding Path="CoverImagePath">
 
-                            <!-- Информация о книге -->
-                            <StackPanel Margin="10" Height="120">
-                                <TextBlock Text="{Binding Title}" FontWeight="Bold" 
+                                            </Binding>
+                                        </Image.Source>
+                                    </Image>
+                                </Border>
+
+                                <StackPanel Margin="10" Height="120">
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" 
                                                FontSize="14" TextWrapping="Wrap"
                                                Margin="0,0,0,5"/>
-                                <TextBlock Text="{Binding AuthorName}" 
+                                    <TextBlock Text="{Binding Author.DisplayName}" 
                                                FontSize="11" Foreground="Gray"
                                                Margin="0,0,0,5"/>
 
-                                <!-- Рейтинг -->
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                    <TextBlock Text="★" Foreground="Gold" FontSize="14"/>
-                                    <TextBlock Text="{Binding AverageRating, StringFormat={}{0:F1}}" 
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <TextBlock Text="★" Foreground="Gold" FontSize="14"/>
+                                        <TextBlock Text="{Binding AverageRating, StringFormat={}{0:F1}}" 
                                                    FontSize="12" Margin="5,0,0,0"/>
-                                    <TextBlock Text="{Binding ReviewsCount, StringFormat='(отзывов: {0})'}" 
+                                        <TextBlock Text="{Binding ReviewsCount, StringFormat='(отзывов: {0})'}" 
                                                    FontSize="10" Foreground="Gray" Margin="5,0,0,0"/>
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <!-- Жанры -->
-                                <TextBlock Text="{Binding GenresString}" FontSize="10" 
+                                    <TextBlock Text="{Binding GenresString}" FontSize="10" 
                                                Foreground="#7F8C8D" TextWrapping="Wrap"
                                                MaxHeight="40"/>
 
-                                <!-- Кнопки -->
-                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                    <Button Content="Читать" Width="80" Height="30"
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <Button Content="Читать" Width="80" Height="30"
                                                 Background="#3498DB" Foreground="White"
                                                 Click="BtnRead_Click" Tag="{Binding}"/>
-                                    <Button Content="В список" Width="80" Height="30"
+                                        <Button Content="В список" Width="80" Height="30"
                                                 Margin="5,0,0,0" Background="#2C3E50" 
                                                 Foreground="White" Click="BtnAddToList_Click" 
                                                 Tag="{Binding}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </ScrollViewer>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

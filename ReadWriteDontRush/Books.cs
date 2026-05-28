@@ -18,33 +18,47 @@ namespace ReadWriteDontRush
         public Books()
         {
             this.BookGenres = new HashSet<BookGenres>();
+            this.BookGenres1 = new HashSet<BookGenres>();
             this.Complaints = new HashSet<Complaints>();
+            this.Complaints1 = new HashSet<Complaints>();
+            this.ReadingLists = new HashSet<ReadingLists>();
+            this.ReadingLists1 = new HashSet<ReadingLists>();
             this.Reviews = new HashSet<Reviews>();
+            this.Reviews1 = new HashSet<Reviews>();
             this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
-            this.UserBookLists = new HashSet<UserBookLists>();
+            this.UnfreezeRequests1 = new HashSet<UnfreezeRequests>();
         }
     
         public int BookID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Content { get; set; }
         public string CoverImagePath { get; set; }
+        public string Content { get; set; }
         public int AuthorID { get; set; }
-        public Nullable<double> AverageRating { get; set; }
-        public Nullable<bool> IsFrozen { get; set; }
-        public string FreezeReason { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public bool IsFrozen { get; set; }
+        public System.DateTime CreatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookGenres> BookGenres { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookGenres> BookGenres1 { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaints> Complaints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Complaints> Complaints1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReadingLists> ReadingLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReadingLists> ReadingLists1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reviews> Reviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reviews> Reviews1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnfreezeRequests> UnfreezeRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserBookLists> UserBookLists { get; set; }
+        public virtual ICollection<UnfreezeRequests> UnfreezeRequests1 { get; set; }
     }
 }

@@ -12,14 +12,15 @@ namespace ReadWriteDontRush
     using System;
     using System.Collections.Generic;
     
-    public partial class AuthorRequests
+    public partial class AuthorRoleRequests
     {
         public int RequestID { get; set; }
         public int UserID { get; set; }
-        public string Message { get; set; }
-        public string Status { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public System.DateTime RequestDate { get; set; }
+        public bool IsProcessed { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
     
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

@@ -9,66 +9,59 @@
       Title="AddEditBookPage" Background="White">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Border Background="White" CornerRadius="10" Margin="20" Padding="20">
-            <StackPanel>
-                <TextBlock x:Name="TxtFormTitle" Text="📖 Добавление новой книги" 
-                           FontSize="24" FontWeight="Bold" Margin="0,0,0,20" Foreground="#2C3E50"/>
+        <Grid Background="#F5F5F5" Margin="20">
+            <Border Background="White" CornerRadius="10" Padding="30">
+                <StackPanel>
+                    <TextBlock x:Name="TxtTitle" Text="Добавление новой книги" 
+                               FontSize="24" FontWeight="Bold" 
+                               HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                <!-- Название -->
-                <TextBlock Text="Название книги" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="TxtTitle" Height="40" Margin="0,0,0,15"/>
+                    <TextBlock Text="Название книги" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="TxtBookTitle" Height="35" Margin="0,0,0,15" Padding="5"/>
 
-                <!-- Автор -->
-                <TextBlock Text="Автор" FontWeight="Bold" Margin="0,0,0,5"/>
-                <ComboBox x:Name="CmbAuthor" Height="40" Margin="0,0,0,15" DisplayMemberPath="DisplayName"
-                          SelectedValuePath="UserID"/>
+                    <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="TxtDescription" Height="100" TextWrapping="Wrap"
+                             AcceptsReturn="True" Margin="0,0,0,15" Padding="5"/>
 
-                <!-- Описание -->
-                <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="TxtDescription" Height="100" TextWrapping="Wrap" 
-                         AcceptsReturn="True" Margin="0,0,0,15"/>
+                    <TextBlock Text="Жанры" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <ListBox x:Name="ListGenres" Height="120" 
+                             SelectionMode="Multiple" Margin="0,0,0,15">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding GenreName}" 
+                                          Tag="{Binding GenreID}"
+                                          Checked="GenreCheckBox_Checked"
+                                          Unchecked="GenreCheckBox_Unchecked"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-                <!-- Текст книги -->
-                <TextBlock Text="Текст книги" FontWeight="Bold" Margin="0,0,0,5"/>
-                <TextBox x:Name="TxtContent" Height="200" TextWrapping="Wrap" 
-                         AcceptsReturn="True" VerticalScrollBarVisibility="Auto" 
-                         Margin="0,0,0,15"/>
+                    <TextBlock Text="Путь к обложке (опционально)" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Grid Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtCoverPath" Grid.Column="0" Height="35" Padding="5"/>
+                        <Button x:Name="BtnBrowseCover" Grid.Column="1" Content="Обзор" 
+                                Width="80" Margin="10,0,0,0" Click="BtnBrowseCover_Click"/>
+                    </Grid>
 
-                <!-- Путь к обложке -->
-                <TextBlock Text="Путь к изображению обложки" FontWeight="Bold" Margin="0,0,0,5"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="TxtCoverPath" Height="40" Margin="0,0,10,0"/>
-                    <Button Grid.Column="1" Content="Обзор" Width="60" Height="35" 
-                            Background="#3498DB" Foreground="White" Click="BtnBrowse_Click"/>
-                </Grid>
+                    <TextBlock Text="Текст книги" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="TxtContent" Height="300" TextWrapping="Wrap"
+                             AcceptsReturn="True" Margin="0,0,0,20" 
+                             VerticalScrollBarVisibility="Auto" Padding="5"/>
 
-                <!-- Жанры -->
-                <TextBlock Text="Жанры" FontWeight="Bold" Margin="0,15,0,5"/>
-                <ListBox x:Name="LstGenres" Height="120" SelectionMode="Multiple"
-                         DisplayMemberPath="GenreName" Margin="0,0,0,15"/>
-
-                <!-- Предпросмотр обложки -->
-                <Border Background="#ECF0F1" CornerRadius="5" Padding="10" Margin="0,0,0,15">
-                    <StackPanel>
-                        <TextBlock Text="Предпросмотр обложки" FontWeight="Bold" Margin="0,0,0,10"/>
-                        <Image x:Name="ImgPreview" Height="200" Stretch="Uniform"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="BtnSave" Content="Сохранить" Width="120" Height="40"
+                                Background="#27AE60" Foreground="White" Margin="5"
+                                Click="BtnSave_Click"/>
+                        <Button x:Name="BtnCancel" Content="Отмена" Width="120" Height="40"
+                                Background="#95A5A6" Foreground="White" Margin="5"
+                                Click="BtnCancel_Click"/>
                     </StackPanel>
-                </Border>
-
-                <!-- Кнопки -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="BtnSave" Content="💾 Сохранить" Width="120" Height="40"
-                            Background="#27AE60" Foreground="White" Margin="0,0,10,0"
-                            Click="BtnSave_Click"/>
-                    <Button Content="❌ Отмена" Width="100" Height="40"
-                            Background="#95A5A6" Foreground="White"
-                            Click="BtnCancel_Click"/>
                 </StackPanel>
-            </StackPanel>
-        </Border>
+            </Border>
+        </Grid>
     </ScrollViewer>
 </Page>

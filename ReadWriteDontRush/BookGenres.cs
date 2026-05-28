@@ -14,11 +14,13 @@ namespace ReadWriteDontRush
     
     public partial class BookGenres
     {
-        public int BookGenreID { get; set; }
         public int BookID { get; set; }
         public int GenreID { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
         public virtual Books Books { get; set; }
+        public virtual Books Books1 { get; set; }
         public virtual Genres Genres { get; set; }
+        public virtual Genres Genres1 { get; set; }
     }
 }

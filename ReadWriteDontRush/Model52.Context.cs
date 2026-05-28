@@ -13,10 +13,10 @@ namespace ReadWriteDontRush
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BookPlatformEntities : DbContext
+    public partial class UPKoshelevaEntities : DbContext
     {
-        public BookPlatformEntities()
-            : base("name=BookPlatformEntities")
+        public UPKoshelevaEntities()
+            : base("name=UPKoshelevaEntities")
         {
         }
     
@@ -25,17 +25,16 @@ namespace ReadWriteDontRush
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AuthorRequests> AuthorRequests { get; set; }
+        public virtual DbSet<AuthorRoleRequests> AuthorRoleRequests { get; set; }
         public virtual DbSet<BookGenres> BookGenres { get; set; }
-        public virtual DbSet<BookListTypes> BookListTypes { get; set; }
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Complaints> Complaints { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
+        public virtual DbSet<ReadingLists> ReadingLists { get; set; }
         public virtual DbSet<Reviews> Reviews { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UnfreezeRequests> UnfreezeRequests { get; set; }
-        public virtual DbSet<UserBookLists> UserBookLists { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

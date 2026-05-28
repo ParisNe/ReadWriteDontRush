@@ -9,217 +9,109 @@
       Title="BookPage" Background="White">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-
-        <Grid Margin="20">
-
+        <Grid Background="#F5F5F5" Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Информация о книге -->
-            <Border Grid.Row="0"
-                    Background="White"
-                    CornerRadius="8"
-                    Padding="24"
-                    Margin="0,0,0,16"
-                    BorderBrush="#E5E7EB"
-                    BorderThickness="1">
-
+            <!-- Основная информация о книге -->
+            <Border Grid.Row="0" Background="White" CornerRadius="10" 
+                    Padding="20" Margin="0,0,0,20">
                 <Grid>
-
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="250"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- Обложка -->
-                    <Border Grid.Column="0"
-                            Height="320"
-                            Background="#E5E7EB"
-                            CornerRadius="6"
-                            Margin="0,0,20,0">
+                    <Border Grid.Column="0" Height="300" Background="#ECF0F1" 
+                            CornerRadius="5" Margin="0,0,20,0">
+                        <Image x:Name="BookCover" Stretch="UniformToFill">
+                            <Image.Source>
+                                <Binding Path="CoverImagePath">
 
-                        <Image x:Name="BookCover"
-                               Stretch="UniformToFill"/>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
                     </Border>
 
                     <!-- Информация -->
                     <StackPanel Grid.Column="1">
+                        <TextBlock x:Name="TxtTitle" FontSize="28" FontWeight="Bold" 
+                                   TextWrapping="Wrap" Margin="0,0,0,10"/>
 
-                        <TextBlock x:Name="TxtTitle"
-                                   FontSize="28"
-                                   FontWeight="SemiBold"
-                                   Foreground="#111827"
-                                   TextWrapping="Wrap"
+                        <TextBlock x:Name="TxtAuthor" FontSize="16" Foreground="Gray" 
                                    Margin="0,0,0,10"/>
 
-                        <TextBlock x:Name="TxtAuthor"
-                                   FontSize="15"
-                                   Foreground="#6B7280"
-                                   Margin="0,0,0,8"/>
+                        <TextBlock x:Name="TxtGenres" FontSize="14" Foreground="#7F8C8D" 
+                                   Margin="0,0,0,10"/>
 
-                        <TextBlock x:Name="TxtGenres"
-                                   FontSize="13"
-                                   Foreground="#9CA3AF"
-                                   Margin="0,0,0,14"/>
-
-                        <!-- Рейтинг -->
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0,0,0,16">
-
-                            <TextBlock x:Name="TxtRating"
-                                       FontSize="16"
-                                       Foreground="#6B7280"/>
-
-                            <TextBlock x:Name="TxtReviewsCount"
-                                       FontSize="12"
-                                       Foreground="#9CA3AF"
-                                       Margin="10,3,0,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                            <TextBlock x:Name="TxtRating" FontSize="18" Foreground="Gold"/>
+                            <TextBlock x:Name="TxtReviewsCount" FontSize="12" 
+                                       Foreground="Gray" Margin="10,5,0,0"/>
                         </StackPanel>
 
-                        <!-- Описание -->
-                        <TextBlock Text="Описание"
-                                   FontWeight="SemiBold"
-                                   Foreground="#111827"
-                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="Описание:" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock x:Name="TxtDescription" TextWrapping="Wrap" 
+                                   FontSize="14" Margin="0,0,0,15" MaxHeight="100"/>
 
-                        <TextBlock x:Name="TxtDescription"
-                                   TextWrapping="Wrap"
-                                   FontSize="14"
-                                   Foreground="#374151"
-                                   Margin="0,0,0,20"
-                                   MaxHeight="100"/>
-
-                        <!-- Кнопки -->
-                        <WrapPanel>
-
-                            <Button x:Name="BtnAddToList"
-                                    Content="В мой список"
-                                    Width="130"
-                                    Height="38"
-                                    Margin="0,0,10,10"
-                                    Background="#374151"
-                                    Foreground="White"
-                                    BorderThickness="0"
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="BtnAddToList" Content="В мой список" 
+                                    Background="#3498DB" Foreground="White" 
+                                    Height="40" Width="120" Margin="0,0,10,0"
                                     Click="BtnAddToList_Click"/>
 
-                            <Button x:Name="BtnComplainBook"
-                                    Content="Жалоба на книгу"
-                                    Width="150"
-                                    Height="38"
-                                    Margin="0,0,10,10"
-                                    Background="#E5E7EB"
-                                    Foreground="#374151"
-                                    BorderThickness="0"
+                            <Button x:Name="BtnComplainBook" Content="Жалоба на книгу" 
+                                    Background="#E74C3C" Foreground="White" 
+                                    Height="40" Width="140" Margin="0,0,10,0"
                                     Click="BtnComplainBook_Click"/>
 
-                            <Button x:Name="BtnComplainAuthor"
-                                    Content="Жалоба на автора"
-                                    Width="160"
-                                    Height="38"
-                                    Margin="0,0,10,10"
-                                    Background="#E5E7EB"
-                                    Foreground="#374151"
-                                    BorderThickness="0"
+                            <Button x:Name="BtnComplainAuthor" Content="Жалоба на автора" 
+                                    Background="#E67E22" Foreground="White" 
+                                    Height="40" Width="140" Margin="0,0,10,0"
                                     Click="BtnComplainAuthor_Click"/>
 
-                            <Button x:Name="BtnFreezeBook"
-                                    Content="Заморозить книгу"
-                                    Width="160"
-                                    Height="38"
-                                    Margin="0,0,10,10"
-                                    Background="#D1D5DB"
-                                    Foreground="#111827"
-                                    BorderThickness="0"
-                                    Visibility="Collapsed"
-                                    Click="BtnFreezeBook_Click"/>
-
-                        </WrapPanel>
-
+                            <Button x:Name="BtnFreezeBook" Content="Заморозить книгу" 
+                                    Background="#C0392B" Foreground="White" 
+                                    Height="40" Width="140" Margin="0,0,10,0"
+                                    Visibility="Collapsed" Click="BtnFreezeBook_Click"/>
+                        </StackPanel>
                     </StackPanel>
-
                 </Grid>
-
             </Border>
 
             <!-- Текст книги -->
-            <Border Grid.Row="1"
-                    Background="White"
-                    CornerRadius="8"
-                    Padding="28"
-                    Margin="0,0,0,16"
-                    BorderBrush="#E5E7EB"
-                    BorderThickness="1">
-
+            <Border Grid.Row="1" Background="White" CornerRadius="10" 
+                    Padding="30" Margin="0,0,0,20">
                 <StackPanel>
-
-                    <TextBlock Text="Текст книги"
-                               FontSize="20"
-                               FontWeight="SemiBold"
-                               Foreground="#111827"
-                               Margin="0,0,0,16"/>
-
-                    <ScrollViewer MaxHeight="500"
-                                  VerticalScrollBarVisibility="Auto">
-
-                        <TextBlock x:Name="TxtBookContent"
-                                   FontSize="16"
-                                   LineHeight="26"
-                                   TextWrapping="Wrap"
-                                   FontFamily="Segoe UI"
-                                   Foreground="#374151"/>
-
+                    <TextBlock Text="Текст книги" FontSize="20" FontWeight="Bold" 
+                               Margin="0,0,0,15"/>
+                    <ScrollViewer MaxHeight="500" VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="TxtBookContent" FontSize="16" 
+                                   LineHeight="25" TextWrapping="Wrap"
+                                   FontFamily="Segoe UI"/>
                     </ScrollViewer>
-
                 </StackPanel>
-
             </Border>
 
             <!-- Отзывы -->
-            <Border Grid.Row="2"
-                    Background="White"
-                    CornerRadius="8"
-                    Padding="24"
-                    BorderBrush="#E5E7EB"
-                    BorderThickness="1">
-
+            <Border Grid.Row="2" Background="White" CornerRadius="10" Padding="20">
                 <StackPanel>
+                    <TextBlock Text="Отзывы" FontSize="20" FontWeight="Bold" 
+                               Margin="0,0,0,15"/>
 
-                    <TextBlock Text="Отзывы"
-                               FontSize="20"
-                               FontWeight="SemiBold"
-                               Foreground="#111827"
-                               Margin="0,0,0,16"/>
-
-                    <!-- Добавление отзыва -->
-                    <Border Background="#F9FAFB"
-                            CornerRadius="6"
-                            Padding="16"
-                            Margin="0,0,0,20"
-                            BorderBrush="#E5E7EB"
-                            BorderThickness="1">
-
+                    <!-- Форма добавления отзыва -->
+                    <Border Background="#ECF0F1" CornerRadius="5" Padding="15" 
+                            Margin="0,0,0,20">
                         <StackPanel>
-
-                            <TextBlock Text="Оставить отзыв"
-                                       FontWeight="SemiBold"
-                                       Foreground="#111827"
-                                       Margin="0,0,0,12"/>
-
-                            <StackPanel Orientation="Horizontal"
-                                        Margin="0,0,0,12">
-
-                                <TextBlock Text="Оценка:"
-                                           VerticalAlignment="Center"
-                                           Foreground="#374151"
-                                           Margin="0,0,10,0"/>
-
-                                <ComboBox x:Name="CmbRating"
-                                          Width="100"
-                                          SelectedIndex="0">
-
+                            <TextBlock Text="Оставить отзыв" FontWeight="Bold" 
+                                       Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="Оценка:" Margin="0,0,10,5" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="CmbRating" Width="100" SelectedIndex="0">
                                     <ComboBoxItem Content="1"/>
                                     <ComboBoxItem Content="2"/>
                                     <ComboBoxItem Content="3"/>
@@ -230,122 +122,63 @@
                                     <ComboBoxItem Content="8"/>
                                     <ComboBoxItem Content="9"/>
                                     <ComboBoxItem Content="10"/>
-
                                 </ComboBox>
-
                             </StackPanel>
-
-                            <TextBox x:Name="TxtReview"
-                                     Height="80"
-                                     TextWrapping="Wrap"
-                                     AcceptsReturn="True"
-                                     Margin="0,0,0,12"/>
-
-                            <Button x:Name="BtnSubmitReview"
-                                    Content="Отправить отзыв"
-                                    Width="160"
-                                    Height="36"
-                                    Background="#374151"
-                                    Foreground="White"
-                                    BorderThickness="0"
+                            <TextBox x:Name="TxtReview" Height="80" TextWrapping="Wrap"
+                                     AcceptsReturn="True" Margin="0,0,0,10"/>
+                            <Button x:Name="BtnSubmitReview" Content="Отправить отзыв" 
+                                    Width="150" Height="35" Background="#27AE60" Foreground="White"
                                     Click="BtnSubmitReview_Click"/>
-
                         </StackPanel>
-
                     </Border>
 
                     <!-- Список отзывов -->
                     <ItemsControl x:Name="ReviewsItemsControl">
-
                         <ItemsControl.ItemTemplate>
-
                             <DataTemplate>
-
-                                <Border Background="#F9FAFB"
-                                        CornerRadius="6"
-                                        Padding="16"
-                                        Margin="0,0,0,10"
-                                        BorderBrush="#E5E7EB"
-                                        BorderThickness="1">
-
+                                <Border Background="#F8F9FA" CornerRadius="5" 
+                                        Padding="15" Margin="0,0,0,10">
                                     <Grid>
-
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- Текст -->
                                         <StackPanel Grid.Column="0">
-
-                                            <StackPanel Orientation="Horizontal"
-                                                        Margin="0,0,0,6">
-
-                                                <TextBlock Text="{Binding UserName}"
-                                                           FontWeight="SemiBold"
-                                                           FontSize="14"
-                                                           Foreground="#111827"/>
-
-                                                <TextBlock Text="{Binding CreatedAt, StringFormat=' dd.MM.yyyy'}"
-                                                           FontSize="11"
-                                                           Foreground="#9CA3AF"
-                                                           Margin="10,1,0,0"/>
-
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                                <TextBlock Text="{Binding Users.DisplayName}" 
+                                                           FontWeight="Bold" FontSize="14"/>
+                                                <TextBlock Text="{Binding CreatedAt, StringFormat=' dd.MM.yyyy'}" 
+                                                           FontSize="11" Foreground="Gray" 
+                                                           Margin="10,0,0,0"/>
                                             </StackPanel>
-
-                                            <TextBlock Text="{Binding Rating}"
-                                                       FontSize="12"
-                                                       Foreground="#6B7280"
-                                                       Margin="0,0,0,8"/>
-
-                                            <TextBlock Text="{Binding ReviewText}"
-                                                       TextWrapping="Wrap"
-                                                       Foreground="#374151"/>
-
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                                <TextBlock Text="★" Foreground="Gold" FontSize="14"/>
+                                                <TextBlock Text="{Binding Rating}" FontSize="12" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding ReviewText}" 
+                                                       TextWrapping="Wrap"/>
                                         </StackPanel>
 
-                                        <!-- Кнопки -->
-                                        <StackPanel Grid.Column="1"
-                                                    Orientation="Horizontal">
-
-                                            <Button Content="Жалоба"
-                                                    Width="80"
-                                                    Height="30"
-                                                    Background="#E5E7EB"
-                                                    Foreground="#374151"
-                                                    BorderThickness="0"
-                                                    Click="BtnComplainReview_Click"
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                            <Button Content="Жалоба" Width="80" Height="30"
+                                                    Background="#E74C3C" Foreground="White"
+                                                    Click="BtnComplainReview_Click" 
                                                     Tag="{Binding ReviewID}"/>
-
-                                            <Button x:Name="BtnFreezeReview"
-                                                    Content="Заморозить"
-                                                    Width="100"
-                                                    Height="30"
-                                                    Margin="6,0,0,0"
-                                                    Background="#D1D5DB"
-                                                    Foreground="#111827"
-                                                    BorderThickness="0"
+                                            <Button x:Name="BtnFreezeReview" Content="Заморозить" 
+                                                    Width="90" Height="30" Margin="5,0,0,0"
+                                                    Background="#C0392B" Foreground="White"
                                                     Visibility="Collapsed"
-                                                    Click="BtnFreezeReview_Click"
+                                                    Click="BtnFreezeReview_Click" 
                                                     Tag="{Binding ReviewID}"/>
-
                                         </StackPanel>
-
                                     </Grid>
-
                                 </Border>
-
                             </DataTemplate>
-
                         </ItemsControl.ItemTemplate>
-
                     </ItemsControl>
-
                 </StackPanel>
-
             </Border>
-
         </Grid>
-
     </ScrollViewer>
 </Page>

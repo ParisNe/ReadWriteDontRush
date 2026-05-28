@@ -25,33 +25,42 @@ namespace ReadWriteDontRush
         public MainWindow()
         {
             InitializeComponent();
+
+
+            // Настройка Sidebar в зависимости от роли пользователя
             SetupSidebar();
+
+
             MainFrame.Navigate(new LoginPage());
         }
 
         private void SetupSidebar()
         {
-            if (Core.CurrentUser == null)
-            {
-                SideBarMenu.Visibility = Visibility.Collapsed;
-            }
+            if (Core.CurrentUser == null) SideBarMenu.Visibility = Visibility.Collapsed;
+
             else
             {
                 SideBarMenu.Visibility = Visibility.Visible;
 
-                // Администрирование (RoleID = 1)
-                BtnAdmin.Visibility = Core.CurrentUser.RoleID == 1 ? Visibility.Visible : Visibility.Collapsed;
+                // Администрирование
+                if (Core.CurrentUser.RoleID == 3) // ID роли администратора
+                {
+                    BtnAdmin.Visibility = Visibility.Visible;
+                }
 
-                // Страница автора (RoleID = 3)
-                BtnAuthor.Visibility = Core.CurrentUser.RoleID == 3 ? Visibility.Visible : Visibility.Collapsed;
+                // Страница автора
+                if (Core.CurrentUser.RoleID == 2) // ID роли автора
+                {
+                    BtnAuthor.Visibility = Visibility.Visible;
+                }
 
-                // Предупреждение о заморозке - исправлено с учетом nullable типа
-                bool isFrozen = Core.CurrentUser.IsFrozen.HasValue && Core.CurrentUser.IsFrozen.Value;
-                BtnWarning.Visibility = isFrozen ? Visibility.Visible : Visibility.Collapsed;
+                // Предупреждение о заморозке
+                if (Core.CurrentUser.IsFrozen == true)
+                {
+                    BtnWarning.Visibility = Visibility.Visible;
+                }
             }
         }
-
-
 
         private void BtnCatalog_Click(object sender, RoutedEventArgs e)
         {
@@ -60,49 +69,33 @@ namespace ReadWriteDontRush
 
         private void BtnBookLists_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new BookListsPage());
+
+            MainFrame.Navigate(new ReadingListsPage());
         }
 
         private void BtnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            if (Core.CurrentUser != null && Core.CurrentUser.RoleID == 1)
-                MainFrame.Navigate(new AdminPage());
-            else
-                MessageBox.Show("У вас нет прав доступа", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            MainFrame.Navigate(new AdminPage());
         }
 
         private void BtnAuthor_Click(object sender, RoutedEventArgs e)
         {
-            if (Core.CurrentUser != null && Core.CurrentUser.RoleID == 3)
-                MainFrame.Navigate(new AuthorPage());
-            else
-                MessageBox.Show("У вас нет прав доступа", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            MainFrame.Navigate(new AuthorPage());
         }
 
         private void BtnWarning_Click(object sender, RoutedEventArgs e)
         {
-            if (Core.CurrentUser != null)
-                MainFrame.Navigate(new UserProfilePage());
-            else
-                MessageBox.Show("Необходимо авторизоваться", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            //MainFrame.Navigate(new UnfreezeRequestPage());
         }
 
         private void BtnProfile_Click(object sender, RoutedEventArgs e)
         {
-            if (Core.CurrentUser != null)
-                MainFrame.Navigate(new UserProfilePage());
-            else
-                MessageBox.Show("Необходимо авторизоваться", "Ошибка",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            MainFrame.Navigate(new ProfilePage());
         }
 
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             SetupSidebar();
         }
-
     }
 }

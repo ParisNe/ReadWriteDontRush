@@ -9,45 +9,334 @@
       Title="AdminPage" Background="White">
 
     <Page.Resources>
-        <Style x:Key="AdminMenuButton" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Margin" Value="10,5"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#34495E"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Page.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <!-- Боковое меню -->
-        <Border Grid.Column="0" Background="#2C3E50">
-            <StackPanel Margin="0,20,0,0">
-                <Button x:Name="BtnComplaints" Content="📋 Жалобы" Style="{StaticResource AdminMenuButton}"
-                        Click="BtnComplaints_Click"/>
-                <Button x:Name="BtnUnfreezeRequests" Content="❄️ Заявки на разморозку" Style="{StaticResource AdminMenuButton}"
-                        Click="BtnUnfreezeRequests_Click"/>
-                <Button x:Name="BtnAuthorRequests" Content="✍️ Заявки авторов" Style="{StaticResource AdminMenuButton}"
-                        Click="BtnAuthorRequests_Click"/>
-                <Button x:Name="BtnFrozenItems" Content="🔒 Замороженные элементы" Style="{StaticResource AdminMenuButton}"
-                        Click="BtnFrozenItems_Click"/>
-                <Button x:Name="BtnUsers" Content="👥 Пользователи" Style="{StaticResource AdminMenuButton}"
-                        Click="BtnUsers_Click"/>
-            </StackPanel>
+        <Border Grid.Row="0" Background="#2C3E50" Padding="15">
+            <TextBlock Text="Панель администратора" FontSize="24" FontWeight="Bold" 
+                       Foreground="White" HorizontalAlignment="Center"/>
         </Border>
 
-        <!-- Контент -->
-        <Frame x:Name="AdminContentFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <TabControl Grid.Row="1" Margin="10" Background="White">
+            <TabItem Header="📋 Жалобы">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Список жалоб" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="ComplaintsItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8F9FA" CornerRadius="5" 
+                                            Padding="15" Margin="0,0,0,10">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="14">
+                                                <Run Text="От: "/>
+                                                <Run Text="{Binding UserDisplayName}" Foreground="#3498DB"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="1" Margin="0,5,0,5">
+                                                <Run Text="Тип: "/>
+                                                <Run Text="{Binding ComplaintType}" Foreground="#E74C3C"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="2" Text="{Binding Reason}" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                                <Button Content="✅ Принять" Width="100" Height="30"
+                                                        Background="#27AE60" Foreground="White" Margin="0,0,10,0"
+                                                        Click="AcceptComplaint_Click" Tag="{Binding ComplaintID}"/>
+                                                <Button Content="❌ Отклонить" Width="100" Height="30"
+                                                        Background="#E74C3C" Foreground="White"
+                                                        Click="RejectComplaint_Click" Tag="{Binding ComplaintID}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <TextBlock x:Name="TxtNoComplaints" Text="Нет жалоб" 
+                               Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontSize="14"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="👨‍🎨 Заявки на смену роли">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Список заявок на смену роли" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="AuthorRequestsItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8F9FA" CornerRadius="5" 
+                                            Padding="15" Margin="0,0,0,10">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="14">
+                                                <Run Text="Пользователь: "/>
+                                                <Run Text="{Binding UserDisplayName}" Foreground="#3498DB"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="1" Margin="0,5,0,5">
+                                                <Run Text="Текущая роль: "/>
+                                                <Run Text="{Binding CurrentRoleName}" Foreground="Gray"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="2" Margin="0,0,0,5">
+                                                <Run Text="Дата подачи: "/>
+                                                <Run Text="{Binding RequestDate, StringFormat='dd.MM.yyyy'}" Foreground="Gray"/>
+                                            </TextBlock>
+
+                                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                                <Button Content="✅ Одобрить" Width="100" Height="30"
+                                                        Background="#27AE60" Foreground="White" Margin="0,0,10,0"
+                                                        Click="AcceptAuthorRequest_Click" Tag="{Binding RequestID}"/>
+                                                <Button Content="❌ Отклонить" Width="100" Height="30"
+                                                        Background="#E74C3C" Foreground="White"
+                                                        Click="RejectAuthorRequest_Click" Tag="{Binding RequestID}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <TextBlock x:Name="TxtNoAuthorRequests" Text="Нет заявок" 
+                               Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontSize="14"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="❄️ Заявки на разморозку">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Список заявок на разморозку" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="UnfreezeRequestsItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8F9FA" CornerRadius="5" 
+                                            Padding="15" Margin="0,0,0,10">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="14">
+                                                <Run Text="Пользователь: "/>
+                                                <Run Text="{Binding UserDisplayName}" Foreground="#3498DB"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="1" Margin="0,5,0,5">
+                                                <Run Text="Тип: "/>
+                                                <Run Text="{Binding RequestType}" Foreground="#E67E22"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="2" Text="{Binding Reason}" 
+                                                       TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+                                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                                <Button Content="✅ Разморозить" Width="100" Height="30"
+                                                        Background="#27AE60" Foreground="White" Margin="0,0,10,0"
+                                                        Click="AcceptUnfreezeRequest_Click" Tag="{Binding UnfreezeRequestID}"/>
+                                                <Button Content="❌ Отклонить" Width="100" Height="30"
+                                                        Background="#E74C3C" Foreground="White"
+                                                        Click="RejectUnfreezeRequest_Click" Tag="{Binding UnfreezeRequestID}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <TextBlock x:Name="TxtNoUnfreezeRequests" Text="Нет заявок" 
+                               Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontSize="14"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка 4: Замороженные книги -->
+            <TabItem Header="📚 Замороженные книги">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Список замороженных книг" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <TextBox x:Name="TxtFrozenBookSearch" Grid.Row="1" Height="30" Margin="0,0,0,10"
+                             TextChanged="TxtFrozenBookSearch_TextChanged"/>
+
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="FrozenBooksItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8F9FA" CornerRadius="5" 
+                                            Padding="15" Margin="0,0,0,10">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding Title}" Foreground="#E74C3C"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="1" Margin="0,5,0,5">
+                                                <Run Text="Автор: "/>
+                                                <Run Text="{Binding AuthorName}" Foreground="#3498DB"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="2" Margin="0,0,0,5">
+                                                <Run Text="Жанры: "/>
+                                                <Run Text="{Binding GenresString}" Foreground="Gray"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="3" Margin="0,0,0,10">
+                                                <Run Text="Дата заморозки: "/>
+                                                <Run Text="{Binding FrozenDate, StringFormat='dd.MM.yyyy'}" Foreground="Gray"/>
+                                            </TextBlock>
+
+                                            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                                                <Button Content="🔓 Разморозить" Width="120" Height="30"
+                                                        Background="#27AE60" Foreground="White"
+                                                        Click="UnfreezeBook_Click" Tag="{Binding BookID}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <TextBlock x:Name="TxtNoFrozenBooks" Text="Нет замороженных книг" 
+                               Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontSize="14"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка 5: Управление пользователями -->
+            <TabItem Header="👥 Пользователи">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Управление пользователями" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <TextBox x:Name="TxtUserSearch" Grid.Row="1" Height="30" Margin="0,0,0,10"
+                             TextChanged="TxtUserSearch_TextChanged"/>
+
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="UsersItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8F9FA" CornerRadius="5" 
+                                            Padding="15" Margin="0,0,0,10">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="14">
+                                                <Run Text="{Binding DisplayName}"/>
+                                                <Run Text=" ("/>
+                                                <Run Text="{Binding Login}"/>
+                                                <Run Text=")"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,5">
+                                                <Run Text="Email: "/>
+                                                <Run Text="{Binding Email}" Foreground="Gray"/>
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                                                <Run Text="Роль: "/>
+                                                <Run Text="{Binding RoleName}" Foreground="#3498DB"/>
+                                                <Run Text=" | Статус: "/>
+                                                <Run Text="{Binding Status}" Foreground="{Binding StatusColor}"/>
+                                            </TextBlock>
+
+                                            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                                                <Button Content="Сменить роль" Width="100" Height="30"
+                                                        Background="#3498DB" Foreground="White" Margin="0,0,10,0"
+                                                        Click="ChangeRole_Click" Tag="{Binding UserID}"/>
+                                                <Button Content="Заморозить" Width="100" Height="30"
+                                                        Background="#E74C3C" Foreground="White" Margin="0,0,10,0"
+                                                        Click="FreezeUser_Click" Tag="{Binding UserID}"/>
+                                                <Button Content="Сбросить пароль" Width="120" Height="30"
+                                                        Background="#F39C12" Foreground="White"
+                                                        Click="ResetPassword_Click" Tag="{Binding UserID}"/>
+                                                <Button Content="Разморозить" Width="100" Height="30"
+                                                        Background="#27AE60" Foreground="White" Margin="10,0,0,0"
+                                                        Click="UnfreezeUser_Click" Tag="{Binding UserID}"
+                                                        Visibility="{Binding IsFrozen, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

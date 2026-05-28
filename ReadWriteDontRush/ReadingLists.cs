@@ -12,16 +12,17 @@ namespace ReadWriteDontRush
     using System;
     using System.Collections.Generic;
     
-    public partial class UserBookLists
+    public partial class ReadingLists
     {
-        public int UserBookListID { get; set; }
+        public int ReadingListID { get; set; }
         public int UserID { get; set; }
         public int BookID { get; set; }
-        public int ListTypeID { get; set; }
-        public Nullable<System.DateTime> AddedAt { get; set; }
+        public string Section { get; set; }
+        public System.DateTime AddedAt { get; set; }
     
-        public virtual BookListTypes BookListTypes { get; set; }
         public virtual Books Books { get; set; }
+        public virtual Books Books1 { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

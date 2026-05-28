@@ -18,13 +18,13 @@ namespace ReadWriteDontRush
         public int UserID { get; set; }
         public Nullable<int> BookID { get; set; }
         public Nullable<int> ReviewID { get; set; }
-        public Nullable<int> TargetUserID { get; set; }
         public string Reason { get; set; }
-        public string Status { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public System.DateTime CreatedAt { get; set; }
     
         public virtual Books Books { get; set; }
+        public virtual Books Books1 { get; set; }
         public virtual Reviews Reviews { get; set; }
+        public virtual Reviews Reviews1 { get; set; }
         public virtual Users Users { get; set; }
         public virtual Users Users1 { get; set; }
     }

@@ -14,16 +14,17 @@ namespace ReadWriteDontRush
     
     public partial class UnfreezeRequests
     {
-        public int RequestID { get; set; }
+        public int UnfreezeRequestID { get; set; }
         public int UserID { get; set; }
         public Nullable<int> BookID { get; set; }
-        public Nullable<int> ReviewID { get; set; }
         public string Reason { get; set; }
-        public string Status { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public System.DateTime RequestDate { get; set; }
+        public bool IsProcessed { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
     
         public virtual Books Books { get; set; }
-        public virtual Reviews Reviews { get; set; }
+        public virtual Books Books1 { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

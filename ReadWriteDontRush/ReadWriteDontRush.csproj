@@ -63,39 +63,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AuthorRequests.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+    <Compile Include="AuthorRoleRequests.cs">
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="BookGenres.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BookListTypes.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="Books.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="Complaints.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="Genres.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model2.Context.cs">
+    <Compile Include="Model52.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model2.Context.tt</DependentUpon>
+      <DependentUpon>Model52.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model2.cs">
+    <Compile Include="Model52.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model2.Designer.cs">
+    <Compile Include="Model52.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model2.edmx</DependentUpon>
+      <DependentUpon>Model52.edmx</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddEditBookPage.xaml.cs">
       <DependentUpon>AddEditBookPage.xaml</DependentUpon>
@@ -103,17 +100,8 @@
     <Compile Include="Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AuthorBooksPage.xaml.cs">
-      <DependentUpon>AuthorBooksPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AuthorPage.xaml.cs">
       <DependentUpon>AuthorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AuthorRequestsPage.xaml.cs">
-      <DependentUpon>AuthorRequestsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BookListsPage.xaml.cs">
-      <DependentUpon>BookListsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
@@ -121,41 +109,26 @@
     <Compile Include="Pages\CatalogPage.xaml.cs">
       <DependentUpon>CatalogPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ComplaintsPage.xaml.cs">
-      <DependentUpon>ComplaintsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\FrozenItemsPage.xaml.cs">
-      <DependentUpon>FrozenItemsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UnfreezeRequestsPage.xaml.cs">
-      <DependentUpon>UnfreezeRequestsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UserProfilePage.xaml.cs">
-      <DependentUpon>UserProfilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UsersManagementPage.xaml.cs">
-      <DependentUpon>UsersManagementPage.xaml</DependentUpon>
+    <Compile Include="ReadingLists.cs">
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="Reviews.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="UnfreezeRequests.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserBookLists.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
-      <DependentUpon>Model2.tt</DependentUpon>
+      <DependentUpon>Model52.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -177,19 +150,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AuthorBooksPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\AuthorPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\AuthorRequestsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BookListsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,32 +162,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ComplaintsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\FrozenItemsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UnfreezeRequestsPage.xaml">
+    <Page Include="Pages\ProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UserProfilePage.xaml">
+    <Page Include="Pages\ReadingListsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UsersManagementPage.xaml">
+    <Page Include="Pages\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ReadingListsPage.xaml.cs">
+      <DependentUpon>ReadingListsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -244,12 +206,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model2.edmx">
+    <EntityDeploy Include="Model52.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model52.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model2.edmx.diagram">
-      <DependentUpon>Model2.edmx</DependentUpon>
+    <None Include="Model52.edmx.diagram">
+      <DependentUpon>Model52.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -271,17 +233,18 @@
     <Resource Include="Images\author.png" />
     <Resource Include="Images\Books.png" />
     <Resource Include="Images\admin.png" />
-    <Content Include="Model2.Context.tt">
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model52.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model2.edmx</DependentUpon>
-      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+      <DependentUpon>Model52.edmx</DependentUpon>
+      <LastGenOutput>Model52.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model2.tt">
+    <Content Include="Model52.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model2.edmx</DependentUpon>
-      <LastGenOutput>Model2.cs</LastGenOutput>
+      <DependentUpon>Model52.edmx</DependentUpon>
+      <LastGenOutput>Model52.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

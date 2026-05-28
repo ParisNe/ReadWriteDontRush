@@ -18,7 +18,7 @@ namespace ReadWriteDontRush
         public Reviews()
         {
             this.Complaints = new HashSet<Complaints>();
-            this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
+            this.Complaints1 = new HashSet<Complaints>();
         }
     
         public int ReviewID { get; set; }
@@ -26,15 +26,15 @@ namespace ReadWriteDontRush
         public int BookID { get; set; }
         public string ReviewText { get; set; }
         public int Rating { get; set; }
-        public Nullable<bool> IsFrozen { get; set; }
-        public string FreezeReason { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public System.DateTime CreatedAt { get; set; }
     
         public virtual Books Books { get; set; }
+        public virtual Books Books1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaints> Complaints { get; set; }
-        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnfreezeRequests> UnfreezeRequests { get; set; }
+        public virtual ICollection<Complaints> Complaints1 { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

@@ -21,89 +21,132 @@ namespace ReadWriteDontRush.Pages
     /// </summary>
     public partial class AddEditBookPage : Page
     {
-        private Books editingBook;
-        private bool isEditMode;
+        private int? editingBookId = null;
+        private List<int> selectedGenreIds = new List<int>();
 
-        public AddEditBookPage(Books book)
+        // Конструктор для добавления новой книги
+        public AddEditBookPage()
         {
             InitializeComponent();
-            editingBook = book;
-            isEditMode = book != null;
-
-            LoadAuthors();
             LoadGenres();
-
-            if (isEditMode)
-            {
-                TxtFormTitle.Text = "✏️ Редактирование книги";
-                LoadBookData();
-            }
         }
 
-        private void LoadAuthors()
+        // Конструктор для редактирования существующей книги
+        public AddEditBookPage(int bookId) : this()
         {
-            var authors = Core.Context.Users.Where(u => u.RoleID == 3).ToList();
-            CmbAuthor.ItemsSource = authors;
-            CmbAuthor.SelectedValuePath = "UserID";
+            editingBookId = bookId;
+            TxtTitle.Text = "Редактирование книги";
+            LoadBookData();
         }
 
         private void LoadGenres()
         {
-            var genres = Core.Context.Genres.ToList();
-            LstGenres.ItemsSource = genres;
+            try
+            {
+                var genres = Core.Context.Genres.ToList();
+                ListGenres.ItemsSource = genres;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки жанров: {ex.Message}", "Ошибка",
+                               MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void LoadBookData()
         {
-            TxtTitle.Text = editingBook.Title;
-            TxtDescription.Text = editingBook.Description;
-            TxtContent.Text = editingBook.Content;
-            TxtCoverPath.Text = editingBook.CoverImagePath;
-
-            if (editingBook.CoverImagePath != null)
+            try
             {
-                try
+                if (editingBookId == null) return;
+
+                var book = Core.Context.Books.Find(editingBookId);
+                if (book == null)
                 {
-                    ImgPreview.Source = new BitmapImage(new Uri(editingBook.CoverImagePath, UriKind.RelativeOrAbsolute));
+                    MessageBox.Show("Книга не найдена", "Ошибка",
+                                   MessageBoxButton.OK, MessageBoxImage.Error);
+                    NavigationService.GoBack();
+                    return;
                 }
-                catch { }
+
+                TxtBookTitle.Text = book.Title;
+                TxtDescription.Text = book.Description;
+                TxtCoverPath.Text = book.CoverImagePath;
+                TxtContent.Text = book.Content;
+
+                // Отмечаем выбранные жанры
+                selectedGenreIds = book.BookGenres.Select(bg => bg.GenreID).ToList();
+
+                // Обновляем CheckBox в ListBox
+                foreach (var item in ListGenres.Items)
+                {
+                    var genre = item as Genres;
+                    if (genre != null && selectedGenreIds.Contains(genre.GenreID))
+                    {
+                        var container = ListGenres.ItemContainerGenerator.ContainerFromItem(item) as ListBoxItem;
+                        if (container != null)
+                        {
+                            var checkBox = FindVisualChild<CheckBox>(container);
+                            if (checkBox != null)
+                                checkBox.IsChecked = true;
+                        }
+                    }
+                }
             }
-
-            // Выбираем автора
-            CmbAuthor.SelectedValue = editingBook.AuthorID;
-
-            // Выбираем жанры
-            var bookGenres = editingBook.BookGenres.Select(bg => bg.GenreID).ToList();
-            foreach (var item in LstGenres.Items)
+            catch (Exception ex)
             {
-                var genre = item as Genres;
-                if (bookGenres.Contains(genre.GenreID))
-                {
-                    LstGenres.SelectedItems.Add(item);
-                }
+                MessageBox.Show($"Ошибка загрузки книги: {ex.Message}", "Ошибка",
+                               MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void BtnBrowse_Click(object sender, RoutedEventArgs e)
+        private T FindVisualChild<T>(DependencyObject parent) where T : FrameworkElement
         {
-            var dialog = new OpenFileDialog
+            for (int i = 0; i < System.Windows.Media.VisualTreeHelper.GetChildrenCount(parent); i++)
             {
-                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp",
-                Title = "Выберите изображение обложки"
+                var child = System.Windows.Media.VisualTreeHelper.GetChild(parent, i);
+                if (child is T)
+                    return (T)child;
+
+                var result = FindVisualChild<T>(child);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
+
+        private void GenreCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox != null && checkBox.Tag != null)
+            {
+                int genreId = (int)checkBox.Tag;
+                if (!selectedGenreIds.Contains(genreId))
+                    selectedGenreIds.Add(genreId);
+            }
+        }
+
+        private void GenreCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = sender as CheckBox;
+            if (checkBox != null && checkBox.Tag != null)
+            {
+                int genreId = (int)checkBox.Tag;
+                if (selectedGenreIds.Contains(genreId))
+                    selectedGenreIds.Remove(genreId);
+            }
+        }
+
+        private void BtnBrowseCover_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Title = "Выберите обложку книги",
+                Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
             };
 
-            if (dialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true)
             {
-                TxtCoverPath.Text = dialog.FileName;
-                try
-                {
-                    ImgPreview.Source = new BitmapImage(new Uri(dialog.FileName));
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка загрузки изображения: {ex.Message}", "Ошибка",
-                                   MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                TxtCoverPath.Text = openFileDialog.FileName;
             }
         }
 
@@ -111,63 +154,97 @@ namespace ReadWriteDontRush.Pages
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(TxtTitle.Text))
+                // Валидация
+                if (string.IsNullOrWhiteSpace(TxtBookTitle.Text))
                 {
-                    MessageBox.Show("Введите название книги", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Введите название книги", "Ошибка",
+                                   MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (CmbAuthor.SelectedValue == null)
+                if (string.IsNullOrWhiteSpace(TxtContent.Text))
                 {
-                    MessageBox.Show("Выберите автора", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Введите текст книги", "Ошибка",
+                                   MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (LstGenres.SelectedItems.Count == 0)
+                if (!selectedGenreIds.Any())
                 {
-                    MessageBox.Show("Выберите хотя бы один жанр", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Выберите хотя бы один жанр", "Ошибка",
+                                   MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                if (!isEditMode)
-                {
-                    editingBook = new Books();
-                    Core.Context.Books.Add(editingBook);
-                }
+                Books book;
 
-                editingBook.Title = TxtTitle.Text;
-                editingBook.Description = TxtDescription.Text;
-                editingBook.Content = TxtContent.Text;
-                editingBook.CoverImagePath = TxtCoverPath.Text;
-                editingBook.AuthorID = (int)CmbAuthor.SelectedValue;
-                editingBook.IsFrozen = false;
-                editingBook.CreatedAt = DateTime.Now;
-
-                // Обновляем жанры
-                if (isEditMode)
+                if (editingBookId == null)
                 {
-                    var existingGenres = editingBook.BookGenres.ToList();
-                    foreach (var eg in existingGenres)
+                    // Создание новой книги
+                    book = new Books
                     {
-                        Core.Context.BookGenres.Remove(eg);
+                        Title = TxtBookTitle.Text,
+                        Description = TxtDescription.Text,
+                        CoverImagePath = TxtCoverPath.Text,
+                        Content = TxtContent.Text,
+                        AuthorID = Core.CurrentUser.UserID,
+                        IsFrozen = false,
+                        CreatedAt = DateTime.Now
+                    };
+                    Core.Context.Books.Add(book);
+                    Core.Context.SaveChanges();
+
+                    // Добавляем жанры
+                    foreach (var genreId in selectedGenreIds)
+                    {
+                        var bookGenre = new BookGenres
+                        {
+                            BookID = book.BookID,
+                            GenreID = genreId,
+                            Date = DateTime.Now
+                        };
+                        Core.Context.BookGenres.Add(bookGenre);
                     }
                 }
-
-                foreach (var item in LstGenres.SelectedItems)
+                else
                 {
-                    var genre = item as Genres;
-                    editingBook.BookGenres.Add(new BookGenres
+                    // Редактирование существующей книги
+                    book = Core.Context.Books.Find(editingBookId);
+                    if (book == null)
                     {
-                        BookID = editingBook.BookID,
-                        GenreID = genre.GenreID
-                    });
+                        MessageBox.Show("Книга не найдена", "Ошибка",
+                                       MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    book.Title = TxtBookTitle.Text;
+                    book.Description = TxtDescription.Text;
+                    book.CoverImagePath = TxtCoverPath.Text;
+                    book.Content = TxtContent.Text;
+
+                    // Обновляем жанры
+                    var existingGenres = Core.Context.BookGenres.Where(bg => bg.BookID == book.BookID).ToList();
+                    foreach (var existing in existingGenres)
+                    {
+                        Core.Context.BookGenres.Remove(existing);
+                    }
+
+                    foreach (var genreId in selectedGenreIds)
+                    {
+                        var bookGenre = new BookGenres
+                        {
+                            BookID = book.BookID,
+                            GenreID = genreId,
+                            Date = DateTime.Now
+                        };
+                        Core.Context.BookGenres.Add(bookGenre);
+                    }
                 }
 
                 Core.Context.SaveChanges();
 
-                MessageBox.Show(isEditMode ? "Книга обновлена" : "Книга добавлена", "Успех",
+                MessageBox.Show("Книга успешно сохранена", "Успех",
                                MessageBoxButton.OK, MessageBoxImage.Information);
-
                 NavigationService.GoBack();
             }
             catch (Exception ex)
@@ -182,4 +259,5 @@ namespace ReadWriteDontRush.Pages
             NavigationService.GoBack();
         }
     }
+}
 }

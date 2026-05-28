@@ -23,14 +23,20 @@ namespace ReadWriteDontRush.Pages
         private int bookId;
         private Books currentBook;
 
-        public BookPage(int bookId)
+        // Пустой конструктор для XAML
+        public BookPage()
         {
             InitializeComponent();
+        }
+
+        // Конструктор с параметром для навигации
+        public BookPage(int bookId) : this()
+        {
             this.bookId = bookId;
             LoadBookData();
             LoadReviews();
 
-            // Проверяем роль администратора (RoleID = 1)
+            // Проверяем роль администратора
             if (Core.CurrentUser != null && Core.CurrentUser.RoleID == 1)
             {
                 BtnFreezeBook.Visibility = Visibility.Visible;
@@ -57,7 +63,7 @@ namespace ReadWriteDontRush.Pages
             }
 
             TxtTitle.Text = currentBook.Title;
-            TxtDescription.Text = currentBook.Description ?? "Описание отсутствует";
+            TxtDescription.Text = currentBook.Description;
 
             // Загружаем текст книги
             if (!string.IsNullOrEmpty(currentBook.Content))
@@ -75,7 +81,8 @@ namespace ReadWriteDontRush.Pages
             {
                 try
                 {
-                    BookCover.Source = new BitmapImage(new Uri(currentBook.CoverImagePath, UriKind.RelativeOrAbsolute));
+                    BookCover.Source = new System.Windows.Media.Imaging.BitmapImage(
+                        new Uri(currentBook.CoverImagePath, UriKind.RelativeOrAbsolute));
                 }
                 catch
                 {
@@ -87,7 +94,7 @@ namespace ReadWriteDontRush.Pages
             if (currentBook.Users != null)
                 TxtAuthor.Text = $"Автор: {currentBook.Users.DisplayName}";
 
-            // Жанры - ИСПРАВЛЕНО: используем Genres вместо Genre
+            // Жанры
             var genres = currentBook.BookGenres.Select(bg => bg.Genres.GenreName).ToList();
             TxtGenres.Text = genres.Any() ? $"Жанры: {string.Join(", ", genres)}" : "Жанры не указаны";
 
@@ -109,16 +116,7 @@ namespace ReadWriteDontRush.Pages
         private void LoadReviews()
         {
             var reviews = Core.Context.Reviews
-                .Where(r => r.BookID == bookId && (r.IsFrozen == false || r.IsFrozen == null))
-                .Select(r => new
-                {
-                    r.ReviewID,
-                    r.UserID,
-                    UserName = r.Users.DisplayName,
-                    r.Rating,
-                    r.ReviewText,
-                    r.CreatedAt
-                })
+                .Where(r => r.BookID == bookId)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToList();
 
@@ -127,7 +125,10 @@ namespace ReadWriteDontRush.Pages
             // Если админ, показываем кнопки заморозки отзывов
             if (Core.CurrentUser != null && Core.CurrentUser.RoleID == 1)
             {
-                ReviewsItemsControl.Loaded += (s, e) => ShowFreezeButtonsForReviews();
+                ReviewsItemsControl.Loaded += (s, e) =>
+                {
+                    ShowFreezeButtonsForReviews();
+                };
             }
         }
 
@@ -149,6 +150,7 @@ namespace ReadWriteDontRush.Pages
             }
         }
 
+        // Вспомогательный метод для поиска контрола по имени
         private T FindVisualChild<T>(DependencyObject parent, string name) where T : FrameworkElement
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
@@ -173,24 +175,17 @@ namespace ReadWriteDontRush.Pages
                 return;
             }
 
+            // Создаем диалог выбора списка
             var window = new Window
             {
                 Title = "Выберите список",
                 Width = 300,
-                Height = 350,  // Увеличил высоту
+                Height = 250,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize
             };
 
-            // Добавляем ScrollViewer для прокрутки
-            var scrollViewer = new ScrollViewer
-            {
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled
-            };
-
             var stackPanel = new StackPanel { Margin = new Thickness(10) };
-
             var textBlock = new TextBlock
             {
                 Text = "Выберите раздел для книги:",
@@ -199,57 +194,55 @@ namespace ReadWriteDontRush.Pages
             };
             stackPanel.Children.Add(textBlock);
 
-            var listTypes = Core.Context.BookListTypes.ToList();
-            foreach (var listType in listTypes)
+            var sections = new[] { "В планах", "Читаю", "Прочитано", "Заброшено" };
+            foreach (var section in sections)
             {
                 var btn = new Button
                 {
-                    Content = listType.ListName,
-                    Height = 45,  // Увеличил высоту кнопок
+                    Content = section,
+                    Height = 40,
                     Margin = new Thickness(0, 5, 0, 5),
                     Background = Brushes.LightGray,
-                    FontSize = 14,
-                    Tag = listType.ListTypeID
+                    Tag = section
                 };
                 btn.Click += (s, args) =>
                 {
-                    AddToList((int)btn.Tag, listType.ListName);
+                    AddToList(section);
                     window.Close();
                 };
                 stackPanel.Children.Add(btn);
             }
 
-            scrollViewer.Content = stackPanel;
-            window.Content = scrollViewer;
+            window.Content = stackPanel;
             window.Owner = Application.Current.MainWindow;
             window.ShowDialog();
         }
 
-        private void AddToList(int listTypeId, string listName)
+        private void AddToList(string section)
         {
             if (currentBook != null && Core.CurrentUser != null)
             {
-                var existing = Core.Context.UserBookLists
-                    .FirstOrDefault(ubl => ubl.UserID == Core.CurrentUser.UserID &&
-                                          ubl.BookID == currentBook.BookID);
+                var existing = Core.Context.ReadingLists
+                    .FirstOrDefault(rl => rl.UserID == Core.CurrentUser.UserID &&
+                                         rl.BookID == currentBook.BookID);
 
                 if (existing != null)
                 {
-                    existing.ListTypeID = listTypeId;
-                    MessageBox.Show($"Книга перемещена в список '{listName}'", "Успех",
+                    existing.Section = section;
+                    MessageBox.Show($"Книга перемещена в раздел '{section}'", "Успех",
                                    MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    UserBookLists newList = new UserBookLists
+                    ReadingLists newList = new ReadingLists
                     {
                         UserID = Core.CurrentUser.UserID,
                         BookID = currentBook.BookID,
-                        ListTypeID = listTypeId,
+                        Section = section,
                         AddedAt = DateTime.Now
                     };
-                    Core.Context.UserBookLists.Add(newList);
-                    MessageBox.Show($"Книга добавлена в список '{listName}'", "Успех",
+                    Core.Context.ReadingLists.Add(newList);
+                    MessageBox.Show($"Книга добавлена в раздел '{section}'", "Успех",
                                    MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
@@ -275,7 +268,6 @@ namespace ReadWriteDontRush.Pages
                     UserID = Core.CurrentUser.UserID,
                     BookID = bookId,
                     Reason = reasonWindow.Reason,
-                    Status = "На рассмотрении",
                     CreatedAt = DateTime.Now
                 };
                 Core.Context.Complaints.Add(complaint);
@@ -302,9 +294,7 @@ namespace ReadWriteDontRush.Pages
                 {
                     UserID = Core.CurrentUser.UserID,
                     BookID = bookId,
-                    TargetUserID = currentBook.AuthorID,
                     Reason = $"ЖАЛОБА НА АВТОРА: {reasonWindow.Reason}",
-                    Status = "На рассмотрении",
                     CreatedAt = DateTime.Now
                 };
                 Core.Context.Complaints.Add(complaint);
@@ -317,11 +307,11 @@ namespace ReadWriteDontRush.Pages
         private void BtnFreezeBook_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Вы уверены, что хотите заморозить эту книгу?\nЗамороженная книга не будет отображаться в каталоге.",
-                                        "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                                        "Подтверждение", MessageBoxButton.YesNo,
+                                        MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 currentBook.IsFrozen = true;
-                currentBook.FreezeReason = "Заморожена администратором";
                 Core.Context.SaveChanges();
                 MessageBox.Show("Книга заморожена", "Успех",
                                MessageBoxButton.OK, MessageBoxImage.Information);
@@ -346,7 +336,11 @@ namespace ReadWriteDontRush.Pages
                 return;
             }
 
-            int rating = int.Parse(((ComboBoxItem)CmbRating.SelectedItem).Content.ToString());
+            int rating = 5;
+            if (CmbRating.SelectedItem is ComboBoxItem selectedItem)
+            {
+                rating = int.Parse(selectedItem.Content.ToString());
+            }
 
             Reviews review = new Reviews
             {
@@ -354,7 +348,6 @@ namespace ReadWriteDontRush.Pages
                 BookID = bookId,
                 ReviewText = TxtReview.Text,
                 Rating = rating,
-                IsFrozen = false,
                 CreatedAt = DateTime.Now
             };
 
@@ -391,7 +384,6 @@ namespace ReadWriteDontRush.Pages
                     UserID = Core.CurrentUser.UserID,
                     ReviewID = reviewId,
                     Reason = reasonWindow.Reason,
-                    Status = "На рассмотрении",
                     CreatedAt = DateTime.Now
                 };
                 Core.Context.Complaints.Add(complaint);
@@ -413,77 +405,18 @@ namespace ReadWriteDontRush.Pages
                 var review = Core.Context.Reviews.Find(reviewId);
                 if (review != null)
                 {
-                    review.IsFrozen = true;
-                    review.FreezeReason = "Заморожен администратором";
+                    // Если в таблице Reviews есть поле IsFrozen, используйте его:
+                    // review.IsFrozen = true;
+
+                    // Пока удаляем отзыв (временно)
+                    Core.Context.Reviews.Remove(review);
+
                     Core.Context.SaveChanges();
                     MessageBox.Show("Отзыв заморожен", "Успех",
                                    MessageBoxButton.OK, MessageBoxImage.Information);
                     LoadReviews();
                 }
             }
-        }
-    }
-
-    // Диалоговое окно для ввода причины жалобы
-    public class ReasonInputWindow : Window
-    {
-        public string Reason { get; private set; }
-
-        public ReasonInputWindow(string target)
-        {
-            Title = $"Жалоба на {target}";
-            Width = 450;
-            Height = 250;
-            WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            ResizeMode = ResizeMode.NoResize;
-
-            var stackPanel = new StackPanel { Margin = new Thickness(20) };
-
-            stackPanel.Children.Add(new TextBlock
-            {
-                Text = $"Укажите причину жалобы на {target}:",
-                Margin = new Thickness(0, 0, 0, 10),
-                FontWeight = FontWeights.Bold
-            });
-
-            var textBox = new TextBox
-            {
-                Height = 80,
-                TextWrapping = TextWrapping.Wrap,
-                AcceptsReturn = true,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
-            };
-            stackPanel.Children.Add(textBox);
-
-            var buttonPanel = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Margin = new Thickness(0, 20, 0, 0)
-            };
-
-            var okBtn = new Button { Content = "Отправить", Width = 80, Height = 30, Margin = new Thickness(0, 0, 10, 0) };
-            okBtn.Click += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    MessageBox.Show("Введите причину жалобы", "Ошибка",
-                                   MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-                Reason = textBox.Text;
-                DialogResult = true;
-                Close();
-            };
-
-            var cancelBtn = new Button { Content = "Отмена", Width = 80, Height = 30 };
-            cancelBtn.Click += (s, e) => Close();
-
-            buttonPanel.Children.Add(okBtn);
-            buttonPanel.Children.Add(cancelBtn);
-            stackPanel.Children.Add(buttonPanel);
-
-            Content = stackPanel;
         }
     }
 }

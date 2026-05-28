@@ -18,12 +18,16 @@ namespace ReadWriteDontRush
         public Genres()
         {
             this.BookGenres = new HashSet<BookGenres>();
+            this.BookGenres1 = new HashSet<BookGenres>();
         }
     
         public int GenreID { get; set; }
         public string GenreName { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookGenres> BookGenres { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookGenres> BookGenres1 { get; set; }
     }
 }
